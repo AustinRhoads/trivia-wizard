@@ -1,38 +1,70 @@
+:root{
+  --magic-purple: #5e2390;
+  --poison-green: #559022;
+  --border-width: 8px;
+  --border-offset: 33px;
+  --banner-height: 86px;
+}
+
 .App {
   text-align: center;
+  color: #1c0b2b;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#app-banner{
+  
+  text-align: center;
+  margin: 0px;
+  padding: 22px 22px;
+ 
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#quiz{
+  position: absolute;
+  /*left: calc(-100vw - var(--border-offset));*/
+
+  width: calc(100vw - var(--border-offset)) ;
+  height: calc(100vh - var(--border-offset)) ;
+  
+  border: solid var(--magic-purple) var(--border-width);
+
+
+  background-color: var(--magic-purple);
+  
+  z-index: 33;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.quiz-on{
+  left: 0px;
+  top: var(--banner-height);
+  animation: quiz-slide 1.2s;
 }
 
-.App-link {
-  color: #61dafb;
+.quiz-off{
+  left: calc(-100vw - var(--border-offset));
 }
 
-@keyframes App-logo-spin {
+.sliding{
+  animation: quiz-slide 1.2s infinite;
+}
+
+
+
+#quiz-form{
+  width: calc(100vw - var(--border-offset)) ;
+  height: calc(100vh - var(--border-offset)) ;
+  
+  border: solid var(--poison-green) var(--border-width);
+
+}
+
+@keyframes quiz-slide {
   from {
-    transform: rotate(0deg);
+    left: calc(-100vw - var(--border-offset));
   }
-  to {
-    transform: rotate(360deg);
+  to{
+    top: var(--banner-height);
+    left: 0px;
   }
 }
+

@@ -4,6 +4,8 @@ import {useSelector, useDispatch} from 'react-redux';
 
 import QuizActions from './actions/QuizActions';
 
+import QuizPage from './components/QuizPage';
+
 import './App.css';
 
 
@@ -34,6 +36,9 @@ function App() {
 const submit_trivia_request = (e) => {
   e.preventDefault();
   dispatch(QuizActions.GET_QUIZ({category, difficulty}))
+  let quiz = document.getElementById('quiz');
+  quiz.classList.remove("quiz-off");
+  quiz.classList.add("quiz-on");
 }
 
 const get_categories = () => {
@@ -73,9 +78,9 @@ useEffect(() => {
   return (
     <div className="App">
 
-      <h1>Trivia Wizard</h1>
+      <h1 id="app-banner">Trivia Wizard</h1>
 
-      <form onSubmit={e => {submit_trivia_request(e)}}>
+      <form id="quiz-form" onSubmit={e => {submit_trivia_request(e)}}>
 
 
         <label htmlFor="cat">Your Study: </label>
@@ -106,6 +111,10 @@ useEffect(() => {
         <input type="submit" value="SUMBIT" />
 
       </form>
+
+
+
+      <QuizPage quiz={quiz}/>
 
     </div>
   );
