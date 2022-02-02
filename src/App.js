@@ -6,6 +6,22 @@ import QuizActions from './actions/QuizActions';
 
 import './App.css';
 
+
+//TODO:
+//1. CREATE TOKEN SYSTEM
+//
+//2. CREATE QUIZ PAGE/COMPONENT
+//
+//3. CREATE QUESTION COMPONENT
+//
+//4. CREATE POINTS ATTRIBUTE TO GLOBAL STATE
+//
+//5. CREATE ANSWER CHECKER
+//
+//6. ADD POINTS TO GLOBAL STATE
+//
+//7.USERS AND BACKEND MUAHAHAHAHA
+
 function App() {
 
   const dispatch = useDispatch();
@@ -13,6 +29,7 @@ function App() {
   const [difficulty, setDifficulty] = useState("easy")
 
   const categories = useSelector(state => state.quiz_state.categories)
+  const quiz = useSelector(state => state.quiz_state.quiz)
 
 const submit_trivia_request = (e) => {
   e.preventDefault();
@@ -21,12 +38,9 @@ const submit_trivia_request = (e) => {
 
 const get_categories = () => {
   if(categories.length <= 0){
-    console.log("needs cats");
+  
     dispatch(QuizActions.GET_CATEGORIES());
-  } else {
-    console.log("got cats");
-    console.log(categories)
-  }
+  } 
 }
 
 const return_category_options = () => {
@@ -44,8 +58,16 @@ const set_difficulty = (e) => {
 
 }
 
+const show_quiz = () => {
+  if(quiz.length > 0){
+    console.log("gots a quiz yo");
+    console.log(quiz)
+  }
+}
+
 useEffect(() => {
   get_categories()
+  show_quiz()
 })
 
   return (
@@ -54,20 +76,35 @@ useEffect(() => {
       <h1>Trivia Wizard</h1>
 
       <form onSubmit={e => {submit_trivia_request(e)}}>
+
+
         <label htmlFor="cat">Your Study: </label>
+
         <select id="cat" onChange={e => update_category(e)} value={category}>
           {return_category_options()}
         </select>
+
+        
         <br/>
+
+
         <label htmlFor="difficulty">Difficulty: </label>
+
         <select id="difficulty" value={difficulty} onChange={e => set_difficulty(e)}>
+
           <option value="easy">Acolyte</option>
           <option value="medium">Apprentice</option>
           <option value="hard">Master</option>
           <option value="any">Surpise Me</option>
+
         </select>
+
+
         <br/>
+
+
         <input type="submit" value="SUMBIT" />
+
       </form>
 
     </div>

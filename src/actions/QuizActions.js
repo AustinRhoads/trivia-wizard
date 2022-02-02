@@ -17,7 +17,6 @@ const QuizActions = {
         
         return(dispatch) => {
             fetch(SEARCH_ROUTES.CATEGORIES_URL).then(resp => resp.json()).then(obj => {
-                console.log(obj)
                 dispatch({type: "SET_CATEGORIES", payload: obj.trivia_categories})
             })
         }
@@ -28,7 +27,7 @@ const QuizActions = {
       
         return(dispatch) => {
             fetch(url).then(resp => resp.json()).then(obj => {
-                console.log(obj);
+                dispatch({type: "SET_QUIZ", payload: obj.results});
             })
         }
     }
