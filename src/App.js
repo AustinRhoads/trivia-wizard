@@ -16,7 +16,7 @@ function App() {
 
 const submit_trivia_request = (e) => {
   e.preventDefault();
-  console.log(e.target)
+  dispatch(QuizActions.GET_QUIZ({category, difficulty}))
 }
 
 const get_categories = () => {
