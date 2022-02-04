@@ -14,7 +14,8 @@ const SEARCH_ROUTES = {
     SET_DIFFICULTY_TO_EASY: "&difficulty=easy",   
     SET_DIFFICULTY_TO_MEDIUM: "&difficulty=medium",
     SET_DIFFICULTY_TO_HARD: "&difficulty=hard",
-
+    COUNT_URL_BASE: "https://opentdb.com/api_count.php?category=",
+    GLOBAL_QUESTION_COUNT: "https://opentdb.com/api_count_global.php",
 
 };
 

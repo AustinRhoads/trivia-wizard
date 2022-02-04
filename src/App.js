@@ -12,7 +12,7 @@ import './App.css';
 //TODO:
 //1. CREATE TOKEN SYSTEM
 //
-//2. CREATE QUIZ PAGE/COMPONENT
+//2. CREATE QUIZ PAGE/COMPONENT---CHECK
 //
 //3. CREATE QUESTION COMPONENT
 //
@@ -27,11 +27,21 @@ import './App.css';
 function App() {
 
   const dispatch = useDispatch();
-  const [category, setCategory] = useState(9)
-  const [difficulty, setDifficulty] = useState("easy")
+  const [category, setCategory] = useState(9);
+  const [difficulty, setDifficulty] = useState("easy");
+
+
 
   const categories = useSelector(state => state.quiz_state.categories)
   const quiz = useSelector(state => state.quiz_state.quiz)
+//  const all_counts = useSelector(state => state.quiz_state.all_counts);
+
+  const easyCount = useSelector(state => state.quiz_state.easyCount)  
+  const mediumCount = useSelector(state => state.quiz_state.mediumCount)
+  const hardCount = useSelector(state => state.quiz_state.hardCount)
+  const totalCount = useSelector(state => state.quiz_state.totalCount)
+
+
 
 const submit_trivia_request = (e) => {
   e.preventDefault();
@@ -54,13 +64,18 @@ const return_category_options = () => {
   }
 }
 
-const update_category = (e) => {
-  setCategory(e.target.value);
+const get_category_question_counts = () => {
+  dispatch(QuizActions.GET_CATEGORY_QUESTION_COUNTS({category: category}))
+  
+}
+
+const update_category = async (e) => {
+ await setCategory(e.target.value);
+ get_category_question_counts()
 }
 
 const set_difficulty = (e) => {
   setDifficulty(e.target.value)
-
 }
 
 const show_quiz = () => {
@@ -69,6 +84,43 @@ const show_quiz = () => {
     console.log(quiz)
   }
 }
+
+
+
+const display_category_stats = () => {
+  return(
+      <table>
+        <tbody>
+      <tr>
+        <th>Difficulty</th>
+        <th>Questions</th>
+      </tr>
+
+      <tr>
+        <td>Acolyte</td>
+        <td>{easyCount}</td>
+      </tr>
+
+      <tr>
+        <td>Apprentice</td>
+        <td>{mediumCount}</td>
+      </tr>
+
+      <tr>
+        <td>Master</td>
+        <td>{hardCount}</td>
+      </tr>
+
+      <tr>
+        <td>Total</td>
+        <td>{totalCount}</td>
+      </tr>
+
+      </tbody>
+    </table>
+  )
+}
+
 
 useEffect(() => {
   get_categories()
@@ -107,10 +159,15 @@ useEffect(() => {
 
         <br/>
 
+        {display_category_stats()}        
+ 
+
 
         <input type="submit" value="SUMBIT" />
 
       </form>
+
+      
 
 
 

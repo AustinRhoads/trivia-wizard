@@ -68,3 +68,11 @@
   }
 }
 
+
+.question-card{
+  width: calc(100vw - var(--border-offset)) ;
+  height: calc(100vh - var(--border-offset)) ;
+  
+  border: solid var(--poison-green) var(--border-width);
+}
+
