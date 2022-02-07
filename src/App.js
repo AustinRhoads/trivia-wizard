@@ -29,6 +29,7 @@ function App() {
   const dispatch = useDispatch();
   const [category, setCategory] = useState(9);
   const [difficulty, setDifficulty] = useState("easy");
+  const [score, setScore] = useState(0)
 
 
 
@@ -45,7 +46,7 @@ function App() {
 
 const submit_trivia_request = (e) => {
   e.preventDefault();
-  dispatch(QuizActions.GET_QUIZ({category, difficulty}))
+  dispatch(QuizActions.GET_QUIZ({category, difficulty}, get_max_or_ten_questions()))
   let quiz = document.getElementById('quiz');
   quiz.classList.remove("quiz-off");
   quiz.classList.add("quiz-on");
@@ -82,6 +83,19 @@ const show_quiz = () => {
   if(quiz.length > 0){
     console.log("gots a quiz yo");
     console.log(quiz)
+  }
+}
+
+const get_max_or_ten_questions = () => {
+  switch(difficulty){
+    case "easy":
+    return easyCount >= 10 ? 10:easyCount;
+    case "medium":
+    return mediumCount  >= 10 ? 10:mediumCount;
+    case "hard":
+    return hardCount >= 10 ? 10:hardCount;
+    case "any":
+    return totalCount  >= 10 ? 10:totalCount;
   }
 }
 
@@ -125,12 +139,14 @@ const display_category_stats = () => {
 useEffect(() => {
   get_categories()
   show_quiz()
+  get_category_question_counts()
 })
 
   return (
     <div className="App">
 
       <h1 id="app-banner">Trivia Wizard</h1>
+      <h2>Score: {score}</h2>
 
       <form id="quiz-form" onSubmit={e => {submit_trivia_request(e)}}>
 

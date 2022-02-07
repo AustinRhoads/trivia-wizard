@@ -37,11 +37,7 @@ const QuizActions = {
         return(dispatch) => {
             console.log("stuff is happening", url);
             fetch(url).then(resp => resp.json()).then(obj => {
-                if(obj.results.length <= 0){
-                 //   QuizActions.GET_QUIZ_BASED_ON_CATEGORY_COUNT(request_object);
-                   
-                  
-                }
+
                    
                     dispatch({type: "SET_QUIZ", payload: obj.results});
                 

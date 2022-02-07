@@ -45,12 +45,18 @@ export default function QuestionCard(props) {
         </div>
     }
 
+    const submit_answer = (e) => {
+            console.log( selectedAnswer === correct_answer ? `${correct_answer} is Correct!`:`Sorry, the correct answer is ${correct_answer}`)
+    }
+
+
 
 
 
   return <div className="question-card">
       {decode(question)}
       {render_choices()}
+      <button onClick={(e) => submit_answer(e)}>Submit</button>
   </div>;
 }
 
