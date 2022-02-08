@@ -17,7 +17,7 @@ const format_count_request_url = (request_object) => {
 }
 
 
-const QuizActions = {
+const QUIZ_ACTIONS = {
     
     GET_CATEGORIES: () => {
         
@@ -49,13 +49,13 @@ const QuizActions = {
     GET_QUIZ_BASED_ON_CATEGORY_COUNT: (request_object) => {
         let count_url = format_count_request_url(request_object);
          fetch(count_url).then(resp => resp.json()).then(obj => {
-           let count = QuizActions.GET_COUNT_BASED_ON_DIFFICULTY(request_object, obj)
+           let count = QUIZ_ACTIONS.GET_COUNT_BASED_ON_DIFFICULTY(request_object, obj)
           
            if(count > 0){
             console.log( count, " is greater than zero");
-            QuizActions.GET_QUIZ(request_object, count)
+            QUIZ_ACTIONS.GET_QUIZ(request_object, count)
            }
-          // QuizActions.GET_QUIZ(request_object, count)
+          // QUIZ_ACTIONS.GET_QUIZ(request_object, count)
 
         })
     },
@@ -96,4 +96,4 @@ const QuizActions = {
     }
 }
 
-export default QuizActions;
+export default QUIZ_ACTIONS;

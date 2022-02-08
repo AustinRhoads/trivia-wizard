@@ -1,10 +1,14 @@
 //import SEARCH_ROUTES from './constants/SearchRoutes';
 import { useEffect, useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
-import QuizActions from './actions/QuizActions';
+import QUIZ_ACTIONS from './actions/QuizActions';
+import USER_ACTIONS from './actions/UserActions';
 
 import QuizPage from './components/QuizPage';
+
+import Login from './components/Login';
 
 import './App.css';
 
@@ -22,7 +26,7 @@ import './App.css';
 //
 //6. ADD POINTS TO GLOBAL STATE
 //
-//7.USERS AND BACKEND MUAHAHAHAHA
+//7.USERS AND BACKEND MUAHAHAHAHA--
 
 function App() {
 
@@ -42,11 +46,14 @@ function App() {
   const hardCount = useSelector(state => state.quiz_state.hardCount)
   const totalCount = useSelector(state => state.quiz_state.totalCount)
 
+  const user_state = useSelector(state => state.user_state)
+  const logged_in = useSelector(state => state.user_state.logged_in)
+
 
 
 const submit_trivia_request = (e) => {
   e.preventDefault();
-  dispatch(QuizActions.GET_QUIZ({category, difficulty}, get_max_or_ten_questions()))
+  dispatch(QUIZ_ACTIONS.GET_QUIZ({category, difficulty}, get_max_or_ten_questions()))
   let quiz = document.getElementById('quiz');
   quiz.classList.remove("quiz-off");
   quiz.classList.add("quiz-on");
@@ -55,7 +62,7 @@ const submit_trivia_request = (e) => {
 const get_categories = () => {
   if(categories.length <= 0){
   
-    dispatch(QuizActions.GET_CATEGORIES());
+    dispatch(QUIZ_ACTIONS.GET_CATEGORIES());
   } 
 }
 
@@ -66,7 +73,7 @@ const return_category_options = () => {
 }
 
 const get_category_question_counts = () => {
-  dispatch(QuizActions.GET_CATEGORY_QUESTION_COUNTS({category: category}))
+  dispatch(QUIZ_ACTIONS.GET_CATEGORY_QUESTION_COUNTS({category: category}))
   
 }
 
@@ -86,6 +93,14 @@ const show_quiz = () => {
   }
 }
 
+const login_user = (user, functions_object) => {
+  dispatch(USER_ACTIONS.LOGIN(user, functions_object))
+}
+
+const logout_user = () => {
+  dispatch(USER_ACTIONS.LOGOUT())
+}
+
 const get_max_or_ten_questions = () => {
   switch(difficulty){
     case "easy":
@@ -96,6 +111,8 @@ const get_max_or_ten_questions = () => {
     return hardCount >= 10 ? 10:hardCount;
     case "any":
     return totalCount  >= 10 ? 10:totalCount;
+    default:
+      return 10;
   }
 }
 
@@ -147,6 +164,13 @@ useEffect(() => {
 
       <h1 id="app-banner">Trivia Wizard</h1>
       <h2>Score: {score}</h2>
+      <Router>
+        <Routes>
+          <Route path="/login" element={ <Login login_user={login_user} logged_in={logged_in} loading={user_state.loading} log_in_errors={user_state.log_in_errors} /> } />
+
+        </Routes>
+      </Router>
+     
 
       <form id="quiz-form" onSubmit={e => {submit_trivia_request(e)}}>
 
