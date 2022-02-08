@@ -16,6 +16,12 @@ const format_count_request_url = (request_object) => {
      return COUNT_URL_BASE + request_object.category
 }
 
+const set_categories_in_cookie = ({categories}) => {
+       
+    localStorage.setItem("categories", JSON.stringify(categories))
+   
+  }
+
 
 const QUIZ_ACTIONS = {
     
@@ -23,7 +29,7 @@ const QUIZ_ACTIONS = {
         
         return(dispatch) => {
             fetch(SEARCH_ROUTES.CATEGORIES_URL).then(resp => resp.json()).then(obj => {
-
+                set_categories_in_cookie({categories: obj.trivia_categories})
                 dispatch({type: "SET_CATEGORIES", payload: obj.trivia_categories})
             })
         }
@@ -55,14 +61,12 @@ const QUIZ_ACTIONS = {
             console.log( count, " is greater than zero");
             QUIZ_ACTIONS.GET_QUIZ(request_object, count)
            }
-          // QUIZ_ACTIONS.GET_QUIZ(request_object, count)
 
         })
     },
 
     GET_COUNT_BASED_ON_DIFFICULTY: (request_object, obj) => {
-        //console.log("request: ", request_object);
-        //console.log(obj);
+
 
         const { category_question_count } = obj;
         const { total_easy_question_count, total_medium_question_count, total_hard_question_count, total_question_count} = category_question_count
@@ -80,20 +84,37 @@ const QUIZ_ACTIONS = {
     },
 
     GET_CATEGORY_QUESTION_COUNTS: (request_object) => {
+
         let count_url = format_count_request_url(request_object);
-       // console.log("action before dispatch", count_url);
+
 
         return(dispatch) => {
             
             fetch(count_url).then(resp => resp.json()).then(obj => {
                     
-                    dispatch({type: "SET_COUNTS", location: `category_${obj.category_id}_question_count`, payload: obj.category_question_count})
+                    dispatch({type: "SET_FETCHED_COUNTS", location: `category_${obj.category_id}_question_count`, payload: obj.category_question_count})
                 
                 }
             )
         }
 
+    },
+    SET_COUNTS_FROM_OBJECT: (obj) => {
+        return(dispatch) => {
+            dispatch({type: "SET_COUNTS_FROM_OBJECT", payload: obj})
+        }
+       
+    },
+    GET_ALL_COUNTS: (array) => {
+
+        return async (dispatch) => {
+            for(const category_obj of array) {
+               await dispatch(QUIZ_ACTIONS.GET_CATEGORY_QUESTION_COUNTS(category_obj))
+            }
+           // dispatch({type: "ALL_COUNTS_ARE_FETCHED"})
+        }
     }
+
 }
 
 export default QUIZ_ACTIONS;
