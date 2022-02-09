@@ -1,9 +1,17 @@
 :root{
   --magic-purple: #5e2390;
+  --magic-purple-light: #704794;
+  --magic-blue-dark: #1f5296;
   --poison-green: #559022;
+  --correct-green: #22904b;
+  --tri-blue: #228b90;
+  --tri-blue-dark: #223090;
   --border-width: 8px;
   --border-offset: 33px;
   --banner-height: 86px;
+}
+body{
+  background-color: var(--tri-blue);
 }
 
 .App {
@@ -11,8 +19,10 @@
   color: #1c0b2b;
   font-family: 'dumbledore-two';
   position: absolute;
-  left: 40%;
-  transform: translate(-50%, 0%)
+  left: 50%;
+  transform: translate(-50%, 0%);
+  background-color: var(--tri-blue-dark);
+  width: 100vw;
 }
 
 @font-face {
@@ -35,16 +45,27 @@
   src: url('./typefaces/wizzta.ttf') format("truetype");
 }
 
+#top-nav{
+  position: relative;
+  width: 100vw;
+  min-height: 150px;
+  display: flex;
+  flex-direction: row;
+}
+
 #app-banner{
-  
+  position: absolute;
   text-align: center;
+  width: 100%;
   margin: 0px;
   padding: 22px 22px;
   font-family: 'magic-school';
   font-size: 6em;
   z-index: 33;
+  top: 50%;
   left: 50%;
-  top: 10%;
+  transform: translate(-50%, -50%);
+  text-shadow: #FC0 1px 0 10px;
  
 }
 
@@ -52,17 +73,37 @@
   text-decoration: none;
 }
 
+
+#account-div{
+  position:absolute;
+  top: 50%;
+  right: 20px;
+  transform: translate(0%, -50%);
+  height: 50px;
+}
+
+#user-icon{
+  width: 50px;
+  height: 50px;
+}
+
+
 #home{
+  position: relative;
  /* background-image: url("./images/kisspng-king-arthur-magician-dungeons-dragons-fantasy-my-merlin-5b478c21b2e550.6693665515314155857328.png");*/
  width: 100vw;
  height: 100vh;
 }
 
+
+
 #wizard-img{
   position: absolute;
-  top: 0%;
+  top: -30%;
   left: 70%;
+  transform: translate(-10%, 0%);
   height: 60vh;
+  z-index: -1;
   
 }
 
@@ -73,10 +114,10 @@
   width: calc(100vw - var(--border-offset)) ;
   height: calc(100vh - var(--border-offset)) ;
   
-  border: solid var(--magic-purple) var(--border-width);
+  /*border: solid var(--magic-purple) var(--border-width);*/
 
 
-  background-color: var(--magic-purple);
+ /* background-color: var(--magic-purple);*/
   
   z-index: 33;
 }
@@ -95,19 +136,24 @@
   animation: quiz-slide 1.2s infinite;
 }
 
-#quiz-form-div{
+#game{
+  position: relative;
+}
 
+#quiz-form-div{
+  position: absolute;
+  left: 10%;
 }
 
 
 
 #quiz-form{
-  position: absolute;
-  left: 0%;
+margin-top: 33px;
   width: calc(100vw - var(--border-offset)) ;
   height: calc(100vh - var(--border-offset)) ;
   
-  border: solid var(--poison-green) var(--border-width);
+ /* border: solid var(--poison-green) var(--border-width);*/
+
 
 }
 
@@ -122,29 +168,68 @@
 }
 
 
-.question-card{
+#question-card{
   position: relative;
   width: calc(100vw - var(--border-offset)) ;
   height: calc(100vh - var(--border-offset)) ;
   min-height: 380px;
-  
-  border: solid var(--poison-green) var(--border-width);
+  max-width: 730px;
+  margin: auto;
+  /*border: solid var(--poison-green) var(--border-width);*/
+  border-radius: 22px;
   font-size: 22pt;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-shadow: 2px 2px 15px rgb(0, 0, 0);
 }
 
 .question-div{
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translate(-50%, 0%);
+  /*position: absolute;*/
+  /*top: 10%;
+  left: 0%;
+  transform: translate(0%, 0%);*/
+  width: 50%;
 }
 
 .multiple-choice-element{
   
-  position: absolute;
-  top: 50%;
+ /* position: absolute;*/
+  /*top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);*/
+  width: 50%;
+  display:flex;
+  flex-direction: column;
+  
+  align-items: center;
+}
+
+.answer-choices{
+ 
+  min-height: 42px;
+  min-width: 190px;
+  border-radius: 3em;
+  background: transparent;
+  border: 2px;
+  border-color: var(--tri-blue-dark);
+  border-style: solid;
+  margin-top: 33px;
+}
+
+.answer-choices:hover{
+ 
+  min-height: 42px;
+  min-width: 190px;
+  border-radius: 3em;
+  background: transparent;
+  border: 2px;
+  border-color: var(--correct-green);
+  border-style: solid;
+}
+
+.selected-answer{
+  border: 3px var(--correct-green)
 }
 
 .submit-answer{

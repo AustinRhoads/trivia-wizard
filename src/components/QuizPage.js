@@ -5,7 +5,10 @@ import {decode} from 'html-entities';
 
 export default function QuizPage(props) {
 
+  const {score} = props;
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [showScore, setShowScore] = useState(false)
 
 
 
@@ -13,6 +16,8 @@ export default function QuizPage(props) {
     const next_question = currentQuestion + 1
     if(next_question <= props.quiz.length - 1){
       setCurrentQuestion(next_question)
+    } else {
+      setShowScore(true)
     }
   }
 
@@ -24,6 +29,11 @@ export default function QuizPage(props) {
     }
   }
 
+  const render_score_page = () => {
+    return <div id="score-page">
+      <h1>Total: {score}</h1>
+    </div>
+  }
 
 
 
@@ -45,6 +55,6 @@ export default function QuizPage(props) {
 
   return <div id="quiz" className="quiz-off">
       <h1>QUIZ SCORE: {props.score}</h1>
-    {render_quiz()}
+    { showScore ?  render_score_page():render_quiz()}
   </div>;
 };

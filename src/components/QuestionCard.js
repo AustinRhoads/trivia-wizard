@@ -20,7 +20,7 @@ export default function QuestionCard(props) {
 
 
     const select_answer = (e) => {
-       
+       console.log(e.target.value)
         //if(!submitted){
             setSelectedAnswer(e.target.value)
         //}
@@ -31,33 +31,24 @@ export default function QuestionCard(props) {
         return <div className="multiple-choice-element">
             {choices.map((choice, index) =>  
 
-                <label htmlFor={choice} key={cuid()}> 
-
-                    <input 
-                        id={choice} 
-                        checked={selectedAnswer === choice}
-                        onChange={e => select_answer(e)}
-                        type="radio" value={choice}/>
-
-                {choice}</label>)
+               <button key={cuid()} onClick={e => select_answer(e)} className="answer-choices" value={choice}>{choice}</button>
+               )
             }
         </div>
     }
 
     const submit_answer = (e) => {
             
-           // setSubmitted(true)
-            if(answer_is_correct()){
-                //e.target.style.backgroundColor = "green";
+        
+            if(answer_is_correct()){            
                 props.change_score(10);
                 console.log(`${correct_answer} is Correct!`)
+                setSelectedAnswer("")
             } else {
-               // e.target.style.backgroundColor = "red"
+              
                 props.change_score(-5);
                 console.log(`Sorry, the correct answer is ${correct_answer}`)
-            }
-           // selectedAnswer === decode(correct_answer) ? e.target.style.backgroundColor = "green":e.target.style.backgroundColor = "red"
-           // console.log( selectedAnswer === decode(correct_answer) ? `${correct_answer} is Correct!`:`Sorry, the correct answer is ${correct_answer}`)
+            }       
            props.go_to_next_question()
     }
 
@@ -69,7 +60,7 @@ export default function QuestionCard(props) {
 
 
 
-  return <div className="question-card">
+  return <div id="question-card">
       {<div className="question-div">{decode(question)}</div>}
       {render_choices()}
       <button className="submit-answer" onClick={(e) => submit_answer(e)}>Submit</button>

@@ -11,6 +11,8 @@ import Login from './components/Login';
 import Home from './components/Home';
 import Game from './components/Game';
 
+import UserIcon from './images/kisspng-person-logo-computer-icons-5af2c2029ca2b1.9101275115258588186416.png'
+
 import './App.css';
 
 
@@ -93,6 +95,12 @@ const get_all_counts = () => {
   }
 }
 
+const render_account_div = () => {
+  return <div id="account-div">
+    <img id="user-icon" alt="user-img" src={UserIcon} />
+  </div>
+}
+
 
 
 
@@ -107,7 +115,13 @@ useEffect(() => {
   return (
     <div className="App">
 
+    <div id="top-nav">
+
       <h1 id="app-banner"><a href="/">Trivia Wizard</a></h1>
+      {render_account_div()}
+
+    </div>
+
       <Router>
         <Routes>
 

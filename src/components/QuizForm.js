@@ -21,12 +21,14 @@ export default function QuizForm(props) {
 
 
 
-    const submit_trivia_request = (e) => {
+    const submit_trivia_request = async (e) => {
         e.preventDefault();
         dispatch(QUIZ_ACTIONS.GET_QUIZ({category, difficulty}, get_max_or_ten_questions()))
+        await props.start_game()
         let quiz = document.getElementById('quiz');
         quiz.classList.remove("quiz-off");
         quiz.classList.add("quiz-on");
+       
       }
 
       const return_category_options = () => {
