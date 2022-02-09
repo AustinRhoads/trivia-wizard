@@ -47,8 +47,8 @@ export default function QuestionCard(props) {
     const submit_answer = (e) => {
             console.log(e.target);
             setSubmitted(true)
-            selectedAnswer === correct_answer ? e.target.style.backgroundColor = "green":e.target.style.backgroundColor = "red"
-            console.log( selectedAnswer === correct_answer ? `${correct_answer} is Correct!`:`Sorry, the correct answer is ${correct_answer}`)
+            selectedAnswer === decode(correct_answer) ? e.target.style.backgroundColor = "green":e.target.style.backgroundColor = "red"
+            console.log( selectedAnswer === decode(correct_answer) ? `${correct_answer} is Correct!`:`Sorry, the correct answer is ${correct_answer}`)
     }
 
 

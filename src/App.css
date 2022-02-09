@@ -10,6 +10,9 @@
   text-align: center;
   color: #1c0b2b;
   font-family: 'dumbledore-two';
+  position: absolute;
+  left: 40%;
+  transform: translate(-50%, 0%)
 }
 
 @font-face {
@@ -17,15 +20,34 @@
   src: url('./typefaces/dum2.ttf') format("truetype");
 }
 
+@font-face {
+  font-family: 'dumbledore-two-shadow';
+  src: url('./typefaces/dum2shad.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'magic-school';
+  src: url('./typefaces/MagicSchoolOne.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'wizzta';
+  src: url('./typefaces/wizzta.ttf') format("truetype");
+}
 
 #app-banner{
   
   text-align: center;
   margin: 0px;
   padding: 22px 22px;
-  font-family: 'dumbledore-two';
+  font-family: 'magic-school';
+  font-size: 6em;
 
  
+}
+
+#app-banner a{
+  text-decoration: none;
 }
 
 #quiz{
