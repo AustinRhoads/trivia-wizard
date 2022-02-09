@@ -16,7 +16,7 @@ export default function QuizForm(props) {
     const hardCount = useSelector(state => state.quiz_state.hardCount)
     const totalCount = useSelector(state => state.quiz_state.totalCount)
     const all_counts = useSelector(state => state.quiz_state.all_counts)
-    const all_counts_are_fetched = useSelector(state => state.quiz_state.all_counts_are_fetched)
+    
 
     const get_category_question_counts = () => {
         if(all_counts[`category_${category}_question_count`]){

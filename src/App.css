@@ -9,13 +9,22 @@
 .App {
   text-align: center;
   color: #1c0b2b;
+  font-family: 'dumbledore-two';
 }
+
+@font-face {
+  font-family: 'dumbledore-two';
+  src: url('./typefaces/dum2.ttf') format("truetype");
+}
+
 
 #app-banner{
   
   text-align: center;
   margin: 0px;
   padding: 22px 22px;
+  font-family: 'dumbledore-two';
+
  
 }
 
@@ -70,9 +79,37 @@
 
 
 .question-card{
+  position: relative;
   width: calc(100vw - var(--border-offset)) ;
   height: calc(100vh - var(--border-offset)) ;
+  min-height: 380px;
   
   border: solid var(--poison-green) var(--border-width);
+  font-size: 22pt;
 }
 
+.question-div{
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.multiple-choice-element{
+  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.submit-answer{
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: 80pt;
+  font-family: 'dumbledore-two';
+  font-size: 18pt;
+  
+}

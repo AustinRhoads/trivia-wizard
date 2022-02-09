@@ -7,29 +7,28 @@ export default function QuestionCard(props) {
     const {type, question, correct_answer} = props.question_object
     const shuffled_choices = props.shuffled_choices;
     const [selectedAnswer, setSelectedAnswer] = useState("")
+    const [submitted, setSubmitted] = useState(false)
    
 
 
     const render_choices = () =>{
-            if(type === "multiple"){
 
-               return multiple_choice_element(shuffled_choices)
-
-            } else if (type === "boolean"){
-                return multiple_choice_element(["True", "False"])
-                
-            }
+           return type === "multiple" ? multiple_choice_element(shuffled_choices): multiple_choice_element(["True", "False"])
     }
 
   
 
 
     const select_answer = (e) => {
-        setSelectedAnswer(e.target.value)
+       
+        if(!submitted){
+            setSelectedAnswer(e.target.value)
+        }
+       
     }
 
     const multiple_choice_element = (choices) => {
-        return <div>
+        return <div className="multiple-choice-element">
             {choices.map((choice, index) =>  
 
                 <label htmlFor={choice} key={cuid()}> 
@@ -46,6 +45,9 @@ export default function QuestionCard(props) {
     }
 
     const submit_answer = (e) => {
+            console.log(e.target);
+            setSubmitted(true)
+            selectedAnswer === correct_answer ? e.target.style.backgroundColor = "green":e.target.style.backgroundColor = "red"
             console.log( selectedAnswer === correct_answer ? `${correct_answer} is Correct!`:`Sorry, the correct answer is ${correct_answer}`)
     }
 
@@ -54,9 +56,9 @@ export default function QuestionCard(props) {
 
 
   return <div className="question-card">
-      {decode(question)}
+      {<div className="question-div">{decode(question)}</div>}
       {render_choices()}
-      <button onClick={(e) => submit_answer(e)}>Submit</button>
+      <button className="submit-answer" onClick={(e) => submit_answer(e)}>Submit</button>
   </div>;
 }
 

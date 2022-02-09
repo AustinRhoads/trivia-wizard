@@ -89,10 +89,9 @@ const logout_user = () => {
 
 const get_all_counts = () => {
   let cat_array = []
-  console.log("majajajaj ", all_counts_are_fetched);
+  
   if(categories.length > 0 && !all_counts_are_fetched ){
     
-    console.log("getting them");
     categories.forEach(cat => {
       cat_array.push({category: cat.id})
      
@@ -101,6 +100,7 @@ const get_all_counts = () => {
 
   }
 }
+
 
 
 
@@ -115,7 +115,7 @@ useEffect(() => {
   return (
     <div className="App">
 
-      <h1 id="app-banner">Trivia Wizard</h1>
+      <h1 id="app-banner"><a href="/">Trivia Wizard</a></h1>
       <h2>Score: {score}</h2>
       <Router>
         <Routes>
@@ -132,7 +132,7 @@ useEffect(() => {
 
 
 
-      <QuizPage quiz={quiz}/>
+      <QuizPage quiz={quiz} />
 
     </div>
   );
