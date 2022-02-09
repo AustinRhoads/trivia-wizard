@@ -42,12 +42,28 @@
   padding: 22px 22px;
   font-family: 'magic-school';
   font-size: 6em;
-
+  z-index: 33;
+  left: 50%;
+  top: 10%;
  
 }
 
 #app-banner a{
   text-decoration: none;
+}
+
+#home{
+ /* background-image: url("./images/kisspng-king-arthur-magician-dungeons-dragons-fantasy-my-merlin-5b478c21b2e550.6693665515314155857328.png");*/
+ width: 100vw;
+ height: 100vh;
+}
+
+#wizard-img{
+  position: absolute;
+  top: 0%;
+  left: 70%;
+  height: 60vh;
+  
 }
 
 #quiz{
@@ -79,9 +95,15 @@
   animation: quiz-slide 1.2s infinite;
 }
 
+#quiz-form-div{
+
+}
+
 
 
 #quiz-form{
+  position: absolute;
+  left: 0%;
   width: calc(100vw - var(--border-offset)) ;
   height: calc(100vh - var(--border-offset)) ;
   

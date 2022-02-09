@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 //import {useSelector} from 'react-redux';
 
+import Wizard from "../images/kisspng-king-arthur-magician-dungeons-dragons-fantasy-my-merlin-5b478c21b2e550.6693665515314155857328.png"
+
 export default function Home(props) {
     
     const navigate = useNavigate()
@@ -9,11 +11,11 @@ export default function Home(props) {
 const { logged_in } = props;
 
 const redirect_to_login = () => {
-    navigate('/login', {replace: true})
+    navigate('/login', {replace: false})
 }
 
 const redirect_to_game = () => {
-    navigate('/game', {replace: true})
+    navigate('/game', {replace: false})
 }
 
 const new_game_button = () => {
@@ -47,6 +49,7 @@ const render_new_game_button = () => {
 
   return <div id="home">
       <h1>Home</h1>
+      <img id="wizard-img" alt="wizard" src={Wizard} />
       {render_new_game_button()}
 
   </div>;

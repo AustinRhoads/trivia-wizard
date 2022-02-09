@@ -7,7 +7,7 @@ export default function QuestionCard(props) {
     const {type, question, correct_answer} = props.question_object
     const shuffled_choices = props.shuffled_choices;
     const [selectedAnswer, setSelectedAnswer] = useState("")
-    const [submitted, setSubmitted] = useState(false)
+   // const [submitted, setSubmitted] = useState(false)
    
 
 
@@ -21,9 +21,9 @@ export default function QuestionCard(props) {
 
     const select_answer = (e) => {
        
-        if(!submitted){
+        //if(!submitted){
             setSelectedAnswer(e.target.value)
-        }
+        //}
        
     }
 
@@ -45,10 +45,24 @@ export default function QuestionCard(props) {
     }
 
     const submit_answer = (e) => {
-            console.log(e.target);
-            setSubmitted(true)
-            selectedAnswer === decode(correct_answer) ? e.target.style.backgroundColor = "green":e.target.style.backgroundColor = "red"
-            console.log( selectedAnswer === decode(correct_answer) ? `${correct_answer} is Correct!`:`Sorry, the correct answer is ${correct_answer}`)
+            
+           // setSubmitted(true)
+            if(answer_is_correct()){
+                //e.target.style.backgroundColor = "green";
+                props.change_score(10);
+                console.log(`${correct_answer} is Correct!`)
+            } else {
+               // e.target.style.backgroundColor = "red"
+                props.change_score(-5);
+                console.log(`Sorry, the correct answer is ${correct_answer}`)
+            }
+           // selectedAnswer === decode(correct_answer) ? e.target.style.backgroundColor = "green":e.target.style.backgroundColor = "red"
+           // console.log( selectedAnswer === decode(correct_answer) ? `${correct_answer} is Correct!`:`Sorry, the correct answer is ${correct_answer}`)
+           props.go_to_next_question()
+    }
+
+    const answer_is_correct = () => {
+        return selectedAnswer === decode(correct_answer)
     }
 
 

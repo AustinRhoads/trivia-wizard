@@ -18,16 +18,7 @@ export default function QuizForm(props) {
     const all_counts = useSelector(state => state.quiz_state.all_counts)
     
 
-    const get_category_question_counts = () => {
-        if(all_counts[`category_${category}_question_count`]){
-                
-            dispatch(QUIZ_ACTIONS.SET_COUNTS_FROM_OBJECT(all_counts[`category_${category}_question_count`]))
-        } else{
-            dispatch(QUIZ_ACTIONS.GET_CATEGORY_QUESTION_COUNTS({category: category}))
-        }
-      
-        
-      } 
+
 
 
     const submit_trivia_request = (e) => {
@@ -107,10 +98,21 @@ export default function QuizForm(props) {
 
 
       useEffect(() => {
+
+        const get_category_question_counts = () => {
+            if(all_counts[`category_${category}_question_count`]){
+
+                dispatch(QUIZ_ACTIONS.SET_COUNTS_FROM_OBJECT(all_counts[`category_${category}_question_count`]))
+            } else{
+                dispatch(QUIZ_ACTIONS.GET_CATEGORY_QUESTION_COUNTS({category: category}))
+            }
+        } 
       
-        get_category_question_counts()
+        get_category_question_counts();
         
-      }, [category, all_counts])
+        
+        
+      }, [category, all_counts, dispatch])
 
 
 
