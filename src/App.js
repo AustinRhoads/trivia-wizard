@@ -123,7 +123,7 @@ useEffect(() => {
 
     <div id="top-nav">
 
-      <h1 id="app-banner"><a href="/">HOST TRIVIA KNIGHT</a></h1>
+      <h1 id="app-banner"><a href="/">HOST A TRIVIA NIGHT</a></h1>
       {render_account_div()}
 
     </div>

@@ -207,12 +207,12 @@ body{
 }
 
 .step{
-  min-width: 260px; 
+  min-width: 280px; 
   width: 20vw; 
 
-  height: 30vw;
+
   min-height: 300px;
-  max-height: 370px;
+ 
   border: 2px solid var(--theme-accent);
   margin: 2vw;
   
@@ -220,14 +220,32 @@ body{
 }
 
 .step-header{
-  margin-top: 9px;
-  font-size: 2em;
+ 
+  margin-bottom: 2vw;
+  font-size: 1em;
  
 }
 
 .step-image{
-  width: 80%;
-  max-height: 150px;
+width: 80%;
+ width: 180px;
+ height: 180px;
+ border: 2px solid var(--theme-accent);
+ margin: auto;
+ margin-top: 2vw;
+ margin-bottom: 2vw;
+ 
+}
+
+.step-text{
+  
+  text-align: left;
+  color: #E2E2E2;
+  font-family: "Helvetica", Sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.5em;
+  letter-spacing: 0.6px;
 }
 
 

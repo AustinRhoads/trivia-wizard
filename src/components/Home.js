@@ -73,16 +73,25 @@ const render_new_game_button = () => {
         <div id="homepage-how-to-steps">
 
             <div  className="step" id="step-one">
-                <div className="step-header">STEP 1</div>
+                
+                <div className="step-image"></div>
+                <div className="step-header">Get your Stuff</div>
+                <div className="step-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
               
             </div>
 
             <div className="step"  id="step-two">
-                <div className="step-header">STEP 2</div>
+                
+                <div className="step-image"></div>
+                <div className="step-header">Choose your stuff</div>
+                <div className="step-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
             </div>
 
             <div className="step"  id="step-three">
-                <div className="step-header">STEP 3</div>
+                
+                <div className="step-image"></div>
+                <div className="step-header">Start your stuff</div>
+                <div className="step-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
             </div>
 
         </div>
