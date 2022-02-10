@@ -7,7 +7,7 @@ export default function QuestionCard(props) {
     const {type, question, correct_answer} = props.question_object
     const shuffled_choices = props.shuffled_choices;
     const [selectedAnswer, setSelectedAnswer] = useState("")
-   // const [submitted, setSubmitted] = useState(false)
+  
    
 
 
@@ -21,9 +21,9 @@ export default function QuestionCard(props) {
 
     const select_answer = (e) => {
        console.log(e.target.value)
-        //if(!submitted){
+        
             setSelectedAnswer(e.target.value)
-        //}
+        
        
     }
 

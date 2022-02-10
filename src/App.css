@@ -9,20 +9,35 @@
   --border-width: 8px;
   --border-offset: 33px;
   --banner-height: 86px;
+  --accent-yellow: #FC0;
+
+  /*new color scheme*/
+  --background-light:#1e3c60;
+  --background-color: #001636;
+  --dark-font-color: #020101;
+  --theme-accent: #4bf0bf;
+  --white-font-color: #FFFFFF;
+  --main-font: 'bowlby-one';
 }
 body{
-  background-color: var(--tri-blue);
+  
 }
 
 .App {
   text-align: center;
-  color: #1c0b2b;
-  font-family: 'dumbledore-two';
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0%);
-  background-color: var(--tri-blue-dark);
+  color: var(--white-font-color);
+  /*font-family: 'dumbledore-two';*/
+  font-family: var(--main-font);
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1.2em;
+  letter-spacing: 1.8px;
+
+
+  background-color: var(--background-color);
   width: 100vw;
+  /*overflow-x: hidden;*/
 }
 
 @font-face {
@@ -45,6 +60,11 @@ body{
   src: url('./typefaces/wizzta.ttf') format("truetype");
 }
 
+@font-face {
+  font-family: "bowlby-one";
+  src: url("./typefaces/BowlbyOne-Regular.otf") format("opentype")
+}
+
 #top-nav{
   position: relative;
   width: 100vw;
@@ -56,21 +76,23 @@ body{
 #app-banner{
   position: absolute;
   text-align: center;
-  width: 100%;
+  width: 100vw;
   margin: 0px;
-  padding: 22px 22px;
-  font-family: 'magic-school';
-  font-size: 6em;
+
+  font-family: var(--main-font);
+  
+  font-size: 3em;
   z-index: 33;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-shadow: #FC0 1px 0 10px;
+ /* text-shadow: #FC0 1px 0 10px;*/
  
 }
 
 #app-banner a{
   text-decoration: none;
+  color: var(--white-font-color);
 }
 
 
@@ -92,27 +114,145 @@ body{
   position: relative;
  /* background-image: url("./images/kisspng-king-arthur-magician-dungeons-dragons-fantasy-my-merlin-5b478c21b2e550.6693665515314155857328.png");*/
  width: 100vw;
- height: 100vh;
+ 
+ display: flex;
+ flex-direction: column;
+ min-height: 400px;
+ 
+ background-color: var(--background-color);
+}
+
+.header-one{
+  font-size: 3em;
+  line-height: 1.3em;
+}
+
+.header-two{
+  font-size: 1em;
+  line-height: 1em;
+}
+
+
+.text-one{
+  text-align: left;
+  color: #E2E2E2;
+  font-family: "Helvetica", Sans-serif;
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.6em;
+  letter-spacing: 0.6px;
+}
+#homepage-row-one-text{
+  margin: auto;
+  width: 80%;
+  margin-bottom: 20px;
+}
+
+#homepage-row-one{
+  display: flex;
+  flex-direction: row;
+  width: 90vw;
+}
+
+.homepage-row-one-box{
+  width: 45vw;
+  min-height: 400px;
+  height: 100vh;
+}
+
+.btns{
+  border: solid var(--theme-accent);
+  color: var(--background-color);
+  width: 130px;
+  height: 42px;
+  border-radius: 4px 4px 4px 4px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: var(--theme-accent);
+ 
+}
+
+.btns-inverted{
+  border: solid var(--theme-accent);
+  color: var(--theme-accent);
+  width: 130px;
+  height: 42px;
+  border-radius: 4px 4px 4px 4px;
+  font-size: 16px;
+  font-weight: bold;
+  background: transparent;
+}
+
+
+
+#home button:hover {
+  /*box-shadow: 2px 2px 15px var(--accent-yellow);*/
+}
+
+.highlight-item:hover{
+  box-shadow: 2px 2px 15px var(--accent-yellow);
+}
+
+.animated-h3{
+  background-color: var(--background-color);
+}
+
+
+#homepage-how-to-steps{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.step{
+  min-width: 260px; 
+  width: 20vw; 
+
+  height: 30vw;
+  min-height: 300px;
+  max-height: 370px;
+  border: 2px solid var(--theme-accent);
+  margin: 2vw;
+  
+  border-radius: 4px;
+}
+
+.step-header{
+  margin-top: 9px;
+  font-size: 2em;
+ 
+}
+
+.step-image{
+  width: 80%;
+  max-height: 150px;
 }
 
 
 
 #wizard-img{
   position: absolute;
-  top: -30%;
+  top: -20%;
   left: 70%;
   transform: translate(-10%, 0%);
   height: 60vh;
-  z-index: -1;
+  
   
 }
+
+#dynamic-img{
+  max-width: 60%;
+}
+
 
 #quiz{
   position: absolute;
   /*left: calc(-100vw - var(--border-offset));*/
 
-  width: calc(100vw - var(--border-offset)) ;
-  height: calc(100vh - var(--border-offset)) ;
+  width: 100vw;
+  height: 100vh;
   
   /*border: solid var(--magic-purple) var(--border-width);*/
 
@@ -138,22 +278,41 @@ body{
 
 #game{
   position: relative;
+  background-color: var(--accent-yellow);
+  width: 80vw;
+
 }
 
 #quiz-form-div{
   position: absolute;
-  left: 10%;
+  width: 100vw;
+  background-color: var(--tri-blue-dark);
 }
 
 
 
 #quiz-form{
 margin-top: 33px;
-  width: calc(100vw - var(--border-offset)) ;
-  height: calc(100vh - var(--border-offset)) ;
+ 
+  height: 100vh;
+  width: 100vw;
   
  /* border: solid var(--poison-green) var(--border-width);*/
 
+
+}
+
+#category-input{
+  margin-top: 30px;
+}
+
+#difficulty-input{
+  margin-top: 30px;  
+}
+
+#category-stats-table{
+
+  margin: 0px;
 
 }
 
@@ -170,8 +329,8 @@ margin-top: 33px;
 
 #question-card{
   position: relative;
-  width: calc(100vw - var(--border-offset)) ;
-  height: calc(100vh - var(--border-offset)) ;
+  width: 90vw;
+  height: 90vh;
   min-height: 380px;
   max-width: 730px;
   margin: auto;
@@ -241,4 +400,17 @@ margin-top: 33px;
   font-family: 'dumbledore-two';
   font-size: 18pt;
   
+}
+
+
+
+#fa-heart{
+  color: red;
+}
+
+
+
+
+footer{
+  height: 40px;
 }

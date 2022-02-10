@@ -2,8 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 //import {useSelector} from 'react-redux';
 
-import Wizard from "../images/kisspng-king-arthur-magician-dungeons-dragons-fantasy-my-merlin-5b478c21b2e550.6693665515314155857328.png"
-
+//import Wizard from "../images/kisspng-king-arthur-magician-dungeons-dragons-fantasy-my-merlin-5b478c21b2e550.6693665515314155857328.png"
+import Dynamic_img from "../images/kisspng-computer-icons-encapsulated-postscript-handheld-de-laptop-phone-icon-5b49db86a430a0.3590097415315669826725.png"
 export default function Home(props) {
     
     const navigate = useNavigate()
@@ -19,7 +19,7 @@ const redirect_to_game = () => {
 }
 
 const new_game_button = () => {
-    return <button onClick={() => redirect_to_game()}>New Game</button>
+    return <button className="btns" onClick={() => redirect_to_game()}>New Game</button>
 }
 
 
@@ -27,18 +27,15 @@ const new_game_button = () => {
 const render_new_game_button = () => {
     if(logged_in){
         return <div>
-            <h2>Logged in</h2>
             {new_game_button()}
-            <button onClick={() => props.logout_user()}>Log out</button>
+            
         </div>
 
     } else{
         return <div>
-            <div>{new_game_button()} as guest</div>
-            <br/>
-            or
-            <br/>
-            <button onClick={() => redirect_to_login()}>Log in</button>
+            <div>{new_game_button()} as guest or  <button className="btns-inverted" onClick={() => redirect_to_login()}>Log in</button></div>
+
+           
         </div>
 
     }
@@ -48,9 +45,50 @@ const render_new_game_button = () => {
 
 
   return <div id="home">
-      <h1>Home</h1>
-      <img id="wizard-img" alt="wizard" src={Wizard} />
-      {render_new_game_button()}
+      
+      {/*<img id="wizard-img" alt="wizard" src={Wizard} />*/}
+      <div id="homepage-row-one">
+          <div className="homepage-row-one-box">
+              <div className="header-one" >Lorem ipsum dolor sit amet</div>
+              <div id="homepage-row-one-text" className="text-one">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </div>
+
+          {render_new_game_button()}
+
+          </div>
+
+          <div className="homepage-row-one-box">
+              <img id="dynamic-img" alt="stuff" src={Dynamic_img} />
+
+          </div>
+
+      </div>
+
+      <h3 className="animated-h3"><span>This </span>WILL <span><span>BE </span><span>Animated</span></span></h3>
+
+      <div id="homepage-how-to">
+          <h1 clasName="header-one">HOW TO PLAY</h1>
+
+        <div id="homepage-how-to-steps">
+
+            <div  className="step" id="step-one">
+                <div className="step-header">STEP 1</div>
+              
+            </div>
+
+            <div className="step"  id="step-two">
+                <div className="step-header">STEP 2</div>
+            </div>
+
+            <div className="step"  id="step-three">
+                <div className="step-header">STEP 3</div>
+            </div>
+
+        </div>
+
+      </div>
+     
 
   </div>;
 }

@@ -9,7 +9,7 @@ export default function QuizForm(props) {
 
     const dispatch = useDispatch();
     const [difficulty, setDifficulty] = useState("easy");
-    //const categories = useSelector(state => state.quiz_state.categories)
+    
 
     const easyCount = useSelector(state => state.quiz_state.easyCount)  
     const mediumCount = useSelector(state => state.quiz_state.mediumCount)
@@ -65,7 +65,7 @@ export default function QuizForm(props) {
       
       const display_category_stats = () => {
         return(
-            <table>
+            <table id="category-stats-table">
               <tbody>
             <tr>
               <th>Difficulty</th>
@@ -124,9 +124,9 @@ export default function QuizForm(props) {
       <form id="quiz-form" onSubmit={e => {submit_trivia_request(e)}}>
 
 
-        <label htmlFor="cat">Your Study: </label>
+        <label htmlFor="category-input">Your Study: </label>
 
-        <select id="cat" onChange={e => update_category(e)} value={category}>
+        <select id="category-input" onChange={e => update_category(e)} value={category}>
           {return_category_options()}
         </select>
 
@@ -134,9 +134,9 @@ export default function QuizForm(props) {
         <br/>
 
 
-        <label htmlFor="difficulty">Difficulty: </label>
+        <label htmlFor="difficulty-input">Difficulty: </label>
 
-        <select id="difficulty" value={difficulty} onChange={e => set_difficulty(e)}>
+        <select id="difficulty-input" value={difficulty} onChange={e => set_difficulty(e)}>
 
           <option value="easy">Acolyte</option>
           <option value="medium">Apprentice</option>

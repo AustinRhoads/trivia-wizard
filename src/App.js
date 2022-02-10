@@ -2,6 +2,8 @@
 import { useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FaHeart } from "react-icons/fa";
 
 import QUIZ_ACTIONS from './actions/QuizActions';
 import USER_ACTIONS from './actions/UserActions';
@@ -96,9 +98,13 @@ const get_all_counts = () => {
 }
 
 const render_account_div = () => {
-  return <div id="account-div">
+  if(logged_in){
+    return <div id="account-div">
     <img id="user-icon" alt="user-img" src={UserIcon} />
+    <button className="btns-inverted" onClick={() => logout_user()}>Log out</button>
   </div>
+  }
+
 }
 
 
@@ -117,7 +123,7 @@ useEffect(() => {
 
     <div id="top-nav">
 
-      <h1 id="app-banner"><a href="/">Trivia Wizard</a></h1>
+      <h1 id="app-banner"><a href="/">HOST TRIVIA KNIGHT</a></h1>
       {render_account_div()}
 
     </div>
@@ -134,7 +140,10 @@ useEffect(() => {
      
 
 
-
+    <footer>
+    {/*<p>Created with <i class="fa fa-heart"></i> by Austin Rhoads</p>*/}
+    <p>Created with < FaHeart id="fa-heart" /> by Austin Rhoads</p>
+    </footer>
     </div>
   );
 }
