@@ -46,8 +46,9 @@ const render_new_game_button = () => {
 
   return <div id="home">
       
-      {/*<img id="wizard-img" alt="wizard" src={Wizard} />*/}
+     <div id="home-top">
       <div id="homepage-row-one">
+
           <div className="homepage-row-one-box">
               <div className="header-one" >Lorem ipsum dolor sit amet</div>
               <div id="homepage-row-one-text" className="text-one">
@@ -62,13 +63,18 @@ const render_new_game_button = () => {
               <img id="dynamic-img" alt="stuff" src={Dynamic_img} />
 
           </div>
+          
 
       </div>
 
-      <h3 className="animated-h3"><span>This </span>WILL <span><span>BE </span><span>Animated</span></span></h3>
+        <div id="animated-div">
+            <h3 className="animated-h3"><span>This </span>WILL <span><span>BE </span><span>Animated</span></span></h3>
+        </div>
+      </div>
+
 
       <div id="homepage-how-to">
-          <h1 clasName="header-one">HOW TO PLAY</h1>
+          <h1 className="header-one">HOW TO PLAY</h1>
 
         <div id="homepage-how-to-steps">
 

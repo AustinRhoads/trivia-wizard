@@ -2,7 +2,8 @@ const initialUserState = {
     user: JSON.parse(localStorage.getItem('user')) || {},
     logged_in: (localStorage.getItem('logged_in') === "true" ? true:false) || false,
     loading: false,
-    log_in_errors: []
+    log_in_errors: [],
+    create_user_errors: [],
 }
 
 const UserReducer = (state = initialUserState, action) => {
@@ -14,8 +15,12 @@ const UserReducer = (state = initialUserState, action) => {
             return {...state, logged_in: true, user: action.user,  loading: false, log_in_errors: []};
         case "LOGOUT":
             return {...state, user: {}, logged_in:false, log_in_errors: []}
+        case "CREATING_USER":
+            return {...state, loading: true, create_user_errors: []}
+        case "CREATED_USER":
+            return {...state, logged_in: true, user: action.user,  loading: false, log_in_errors: []};
         case "ERROR":
-            return {...state, user: {}, logged_in: false,  loading: false, log_in_errors: action.log_in_errors}
+            return {...state, user: {}, logged_in: false,  loading: false, log_in_errors: action.log_in_errors};
         default:
             return state;
     }

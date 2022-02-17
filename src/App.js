@@ -4,6 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FaHeart } from "react-icons/fa";
+import QRCode from 'qrcode.react';
 
 import QUIZ_ACTIONS from './actions/QuizActions';
 import USER_ACTIONS from './actions/UserActions';
@@ -59,6 +60,10 @@ function App() {
   
   const logout_user = () => {
     dispatch(USER_ACTIONS.LOGOUT())
+  }
+
+  const create_user = (user, functions_object) => {
+    dispatch(USER_ACTIONS.CREATE_USER(user, functions_object))
   }
 
 
@@ -123,7 +128,7 @@ useEffect(() => {
 
     <div id="top-nav">
 
-      <h1 id="app-banner"><a href="/">HOST A TRIVIA NIGHT</a></h1>
+      <h1 id="app-banner"><a href="/"><span className="flicker"><span className="long-flicker">T</span>RIVIA NI<span className="fast-flicker">G</span>HT</span></a></h1>
       {render_account_div()}
 
     </div>
@@ -132,13 +137,13 @@ useEffect(() => {
         <Routes>
 
           <Route path="/" element={<Home logout_user={logout_user} logged_in={logged_in} />} />
-          <Route path="/login" element={ <Login login_user={login_user} logged_in={logged_in} loading={user_state.loading} log_in_errors={user_state.log_in_errors} /> } />
+          <Route path="/login" element={ <Login login_user={login_user} logged_in={logged_in} loading={user_state.loading} log_in_errors={user_state.log_in_errors} create_user={create_user} /> } />
           <Route path="/game" element={<Game categories={categories} quiz={quiz} />} />
 
         </Routes>
       </Router>
      
-
+    <QRCode value="https://www.austinrhoads-code.com" />
 
     <footer>
     {/*<p>Created with <i class="fa fa-heart"></i> by Austin Rhoads</p>*/}

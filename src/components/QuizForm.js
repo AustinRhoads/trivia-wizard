@@ -33,7 +33,7 @@ export default function QuizForm(props) {
 
       const return_category_options = () => {
         if(props.categories.length >= 0){
-          return props.categories.map(cat => <option key={cat.id} value={cat.id}>{cat.name}</option>)
+          return props.categories.map(cat => <option key={cat.id} value={cat.id}>{cat.name.replace("Entertainment: ", "").replace("Science: ", "")}</option>)
         }
       }
 
@@ -60,6 +60,8 @@ export default function QuizForm(props) {
             return 10;
         }
       }
+
+
       
       
       
@@ -73,17 +75,17 @@ export default function QuizForm(props) {
             </tr>
       
             <tr>
-              <td>Acolyte</td>
+              <td>Easy</td>
               <td>{easyCount}</td>
             </tr>
       
             <tr>
-              <td>Apprentice</td>
+              <td>Medium</td>
               <td>{mediumCount}</td>
             </tr>
       
             <tr>
-              <td>Master</td>
+              <td>Hard</td>
               <td>{hardCount}</td>
             </tr>
       
@@ -120,6 +122,10 @@ export default function QuizForm(props) {
 
 
   return <div id="quiz-form-div">
+
+
+        
+        <br/>
       
       <form id="quiz-form" onSubmit={e => {submit_trivia_request(e)}}>
 
@@ -134,13 +140,15 @@ export default function QuizForm(props) {
         <br/>
 
 
+
+
         <label htmlFor="difficulty-input">Difficulty: </label>
 
         <select id="difficulty-input" value={difficulty} onChange={e => set_difficulty(e)}>
 
-          <option value="easy">Acolyte</option>
-          <option value="medium">Apprentice</option>
-          <option value="hard">Master</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
           <option value="any">Surpise Me</option>
 
         </select>
