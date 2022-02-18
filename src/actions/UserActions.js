@@ -42,7 +42,16 @@ const USER_ACTIONS ={
                      if(returned_user_object.logged_in){
                         dispatch({type: "LOGIN", user: returned_user_object.user});
                         set_user_in_cookie({user: returned_user_object.user, logged_in: true})
-                        functions_object.redirect_to_home()
+                        //functions_object.redirect_to_home()
+
+                        console.log(functions_object)
+                        if(functions_object.need_to_reroute){
+                            
+                            functions_object.redirect_to(functions_object.next_route)
+                        } else {
+                            functions_object.redirect_to_home()
+                        }
+
                      } else {
                          dispatch({type: "ERROR", log_in_errors: returned_user_object.errors})
                        
@@ -95,7 +104,17 @@ const USER_ACTIONS ={
                      if(returned_user_object.created_success){
                         dispatch({type: "CREATED_USER", user: returned_user_object.user});
                         set_user_in_cookie({user: returned_user_object.user, logged_in: true})
-                        functions_object.redirect_to_home()
+
+                        //here some new stuff
+                        console.log(functions_object)
+                        if(functions_object.need_to_reroute){
+                            
+                            functions_object.redirect_to(functions_object.next_route)
+                        } else {
+                            functions_object.redirect_to_home()
+                        }
+                        //done with new stuff
+                        
                      } else {
                          dispatch({type: "ERROR", create_user_errors: returned_user_object.errors})
                        

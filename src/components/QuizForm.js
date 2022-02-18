@@ -103,6 +103,8 @@ export default function QuizForm(props) {
 
       useEffect(() => {
 
+        
+
         const get_category_question_counts = () => {
             if(all_counts[`category_${category}_question_count`]){
 

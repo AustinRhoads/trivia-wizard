@@ -1,7 +1,7 @@
 //import SEARCH_ROUTES from './constants/SearchRoutes';
 import { useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import { Route, Routes} from 'react-router-dom'
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FaHeart } from "react-icons/fa";
 import QRCode from 'qrcode.react';
@@ -112,6 +112,14 @@ const render_account_div = () => {
 
 }
 
+const redirect_if_not_logged_in = () => {
+  if(!logged_in){
+    console.log("not logged in")
+  }
+}
+
+
+
 
 
 
@@ -133,15 +141,16 @@ useEffect(() => {
 
     </div>
 
-      <Router>
+      
         <Routes>
 
-          <Route path="/" element={<Home logout_user={logout_user} logged_in={logged_in} />} />
-          <Route path="/login" element={ <Login login_user={login_user} logged_in={logged_in} loading={user_state.loading} log_in_errors={user_state.log_in_errors} create_user={create_user} /> } />
-          <Route path="/game" element={<Game categories={categories} quiz={quiz} />} />
+          <Route path="/" element={<Home logout_user={logout_user} logged_in={logged_in} redirect_if_not_logged_in={redirect_if_not_logged_in} />} />
+          
+          <Route path="/login" element={ <Login login_user={login_user} logged_in={logged_in} redirect_if_not_logged_in={redirect_if_not_logged_in} loading={user_state.loading} log_in_errors={user_state.log_in_errors} create_user={create_user} /> } />
+          <Route path="/game" element={<Game categories={categories} logged_in={logged_in} redirect_if_not_logged_in={redirect_if_not_logged_in} quiz={quiz} />} />
 
         </Routes>
-      </Router>
+      
      
     <QRCode value="https://www.austinrhoads-code.com" />
 

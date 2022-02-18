@@ -461,6 +461,163 @@ width: 80%;
   max-width: 60%;
 }
 
+.spacer{
+  height: 20px;
+}
+
+#login-componenet{
+  min-height: 100vh;
+ 
+}
+
+#login-signup-div{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  
+  height: 80vh;
+  max-height: 400px;
+  width: 80vw;
+  max-width: 500px;
+  margin: auto;
+
+  
+  border-radius: 25px;
+  box-shadow: 0px 0px 25px #ff65bd;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+}
+
+.form-box{
+  position: absolute;
+  width: 100%;
+}
+
+.form-swap{
+  position: absolute;
+  top: 40px;
+}
+
+.rotate-sqaure{
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border: solid 2px var(--theme-accent);
+  z-index: 2;
+  transform: rotate(45deg);
+}
+
+.unrotate-text{
+  position: absolute;
+  
+  transform: rotate(-45deg) translate(-50%, -20%);
+  
+}
+
+.form-swap a{
+  color: var(--white-font-color);
+  text-decoration: none;
+}
+
+.form-swap:hover{
+  cursor: pointer;
+  text-shadow: 2px 2px 10px #ff65bd;
+}
+
+.slideable{
+  transition: all .5s ease-in-out;
+}
+
+#login-div{
+height: 80%;
+width: 100%;
+
+}
+
+#login-div form{
+ 
+  transform: translate(0%, 0%);
+}
+
+#signup-div{
+  height: 80%;
+  width: 100%;
+  transform: translate(100%, 0%);
+}
+
+/*
+#login-div{
+  margin-top: 50%;
+  transform: translate(0%, -50%);
+  transform: translate(0%, 0%);
+}
+
+#signup-div{
+  margin-top: 50%;
+  transform: translate(0%, -50%);
+  opacity: 1;
+}
+
+.slide-up{
+  transform: translate(0%, 100%);
+  animation: slide-form-up 2s;
+}
+
+.slide-down {
+  transform: translate(0%, -100%);
+  animation: slide-form-down 2s;
+}
+
+@keyframes slide-form-up {
+  from {
+    transform: translate(0%, 0%)
+  }
+  to {
+    transform: translate(0%, -100%)
+  }
+}
+
+@keyframes slide-form-down {
+  from {
+    transform: translate(0%, 0%)
+  }
+  to {
+    transform: translate(0%, 100%)
+  }
+}
+
+*/
+
+.out {
+  opacity: 0;
+}
+
+.in {
+  opacity: 1;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+
+
+
+
 
 #quiz{
   

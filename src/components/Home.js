@@ -1,12 +1,20 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch} from 'react-redux';
+
+import ROUTING_ACTIONS from '../actions/RoutingActions';
 //import {useSelector} from 'react-redux';
 
 //import Wizard from "../images/kisspng-king-arthur-magician-dungeons-dragons-fantasy-my-merlin-5b478c21b2e550.6693665515314155857328.png"
 import Dynamic_img from "../images/kisspng-computer-icons-encapsulated-postscript-handheld-de-laptop-phone-icon-5b49db86a430a0.3590097415315669826725.png"
+
+
+
+
 export default function Home(props) {
     
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
 const { logged_in } = props;
 
@@ -15,8 +23,16 @@ const redirect_to_login = () => {
 }
 
 const redirect_to_game = () => {
-    navigate('/game', {replace: false})
+    if(logged_in){
+        navigate('/game', {replace: false})
+    } else {
+        dispatch(ROUTING_ACTIONS.SET_NEXT_ROUTE("/game"))
+        redirect_to_login()
+    }
+   
 }
+
+
 
 const new_game_button = () => {
     return <button className="btns" onClick={() => redirect_to_game()}>New Game</button>
@@ -33,8 +49,8 @@ const render_new_game_button = () => {
 
     } else{
         return <div>
-            <div>{new_game_button()} as guest or  <button className="btns-inverted" onClick={() => redirect_to_login()}>Log in</button></div>
-
+           {/* <div>{new_game_button()} as guest or  <button className="btns-inverted" onClick={() => redirect_to_login()}>Log in</button></div>*/}
+           {new_game_button()}
            
         </div>
 
