@@ -1,15 +1,16 @@
 import React, {useState, useEffect} from 'react'
-import {useSelector, useDispatch} from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+//import {useSelector, useDispatch} from 'react-redux'
+//import { useNavigate } from 'react-router-dom'
 import cuid from 'cuid'
 
 export default function Login(props) {
 
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+    //const navigate = useNavigate()
+    //const dispatch = useDispatch()
+
+    const {functions_object} = props;
     
-    const next_route = useSelector(state => state.routing_state.next_route);
-    const need_to_reroute = useSelector(state => state.routing_state.need_to_reroute);
+
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -21,22 +22,6 @@ export default function Login(props) {
     const user = {username, password}
     const new_user = {username: newUsername, password: newPassword, password_confirmation: newPasswordConfirmation };
 
-    const functions_object = {
-        redirect_to_home: () => redirect_to_home(),
-        need_to_reroute: need_to_reroute,
-        next_route: next_route,
-        redirect_to: (next_route) => {
-            redirect_to(next_route)
-        },
-    }
-
-    const redirect_to_home = () => {
-        navigate('/', {replace: true})
-    }
-
-    const redirect_to = (next_route) => {
-        navigate(next_route, {replace: true})
-    }
 
     const login_and_redirect = (e) => {
 
@@ -80,31 +65,29 @@ export default function Login(props) {
         props.create_user(new_user, functions_object);
     } 
 
-    const swap_form_type = (e) => {
-       let login = document.getElementById("login-div");
-       let signup = document.getElementById("signup-div");
-       let elements = [login, signup]
-
-        for (const element of elements){
-            if(element.classList.contains("slide-up")){
-                element.classList.remove("slide-up");
-                element.classList.add("slide-down");
-            } else {
-                element.classList.remove("slide-down")
-                element.classList.add("slide-up");
-            }
-        }
-
-       //for(const element of elements){
-       //    console.log("here", element)
-       //}
-        
-        
-    }
+   // const swap_form_type = (e) => {
+   //    let login = document.getElementById("login-div");
+   //    let signup = document.getElementById("signup-div");
+   //    let elements = [login, signup]
+//
+   //     for (const element of elements){
+   //         if(element.classList.contains("slide-up")){
+   //             element.classList.remove("slide-up");
+   //             element.classList.add("slide-down");
+   //         } else {
+   //             element.classList.remove("slide-down")
+   //             element.classList.add("slide-up");
+   //         }
+   //     }
+//
+//
+   //     
+   //     
+   // }
 
 
     useEffect(() => {
-        console.log("in login: ", next_route, need_to_reroute )
+      
     }, [])
 
     return (

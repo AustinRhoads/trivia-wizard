@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import QuizForm from './QuizForm';
 import QuizPage from './QuizPage';
 
 export default function Game(props) {
 
-  const {quiz, categories} = props;
+  const {quiz, categories, redirect_if_not_logged_in} = props;
 
   const [score, setScore] = useState(0)
   const [gameStarted, setGameStarted] = useState(false)
@@ -25,6 +25,10 @@ export default function Game(props) {
   const start_game = () => {
     setGameStarted(true)
   }
+
+  useEffect(() => {
+    redirect_if_not_logged_in()
+  })
 
 
   return <div id="game">

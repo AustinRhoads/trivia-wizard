@@ -44,12 +44,14 @@ const USER_ACTIONS ={
                         set_user_in_cookie({user: returned_user_object.user, logged_in: true})
                         //functions_object.redirect_to_home()
 
-                        console.log(functions_object)
-                        if(functions_object.need_to_reroute){
+                        const {need_to_reroute, redirect_to, next_route, redirect_to_home, reset_next_route} = functions_object
+                       
+                        if(need_to_reroute){
                             
-                            functions_object.redirect_to(functions_object.next_route)
+                            redirect_to(next_route)
+                            reset_next_route()
                         } else {
-                            functions_object.redirect_to_home()
+                            redirect_to_home()
                         }
 
                      } else {
@@ -105,13 +107,16 @@ const USER_ACTIONS ={
                         dispatch({type: "CREATED_USER", user: returned_user_object.user});
                         set_user_in_cookie({user: returned_user_object.user, logged_in: true})
 
+                        const {need_to_reroute, redirect_to, next_route, redirect_to_home, reset_next_route} = functions_object
+
                         //here some new stuff
-                        console.log(functions_object)
-                        if(functions_object.need_to_reroute){
+                  
+                        if(need_to_reroute){
                             
-                            functions_object.redirect_to(functions_object.next_route)
+                            redirect_to(next_route)
+                            reset_next_route()
                         } else {
-                            functions_object.redirect_to_home()
+                            redirect_to_home()
                         }
                         //done with new stuff
                         
