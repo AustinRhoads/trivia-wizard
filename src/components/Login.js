@@ -1,12 +1,10 @@
 import React, {useState, useEffect} from 'react'
-//import {useSelector, useDispatch} from 'react-redux'
-//import { useNavigate } from 'react-router-dom'
+
 import cuid from 'cuid'
 
 export default function Login(props) {
 
-    //const navigate = useNavigate()
-    //const dispatch = useDispatch()
+   
 
     const {functions_object} = props;
     
@@ -65,41 +63,27 @@ export default function Login(props) {
         props.create_user(new_user, functions_object);
     } 
 
-    const form_swap = (e) => {
 
-        
-       // document.body.classList.toggle("disable-scroll");
-
-        //TO SELECT THE FORM DIVS***
-       // let login = document.getElementById("login-div");
-       // let signup = document.getElementById("signup-div");
-       // let elements = [login, signup];
+    const scroll_to = (e, destination) => {
 
         let signup_swapper = document.getElementById("signup-swapper");
         let login_swapper = document.getElementById("login-swapper");
         let swappers = [signup_swapper, login_swapper]
 
-        for(const div of swappers){
-            if(div !== e.target){
-                console.log("not target: ", div)
-                console.log("target: ", e.target)
-            }
+        for(const swap_btn of swappers){
+            swap_btn.classList.toggle("out")
+            swap_btn.classList.toggle("in")
+            swap_btn.classList.toggle("right-swapper")
+            swap_btn.classList.toggle("left-swapper")
         }
-        console.log("ya clicked me", e.target);
-
-    }
-
-    const scroll_to = (e, destination) => {
-
         
         let win = document.getElementById("login-signup-div");
         let x_position_of_destination_element = document.getElementById(destination).getBoundingClientRect().left;
         if(Math.floor(x_position_of_destination_element) !== 169){
+          
             win.scrollTo(x_position_of_destination_element, 0)
-        }
-
-    
-      }
+        }   
+    }
 
 
     useEffect(() => {
@@ -109,13 +93,13 @@ export default function Login(props) {
     return (
         <div id="login-componenet" >
 
-                {/*<div id="signup-swapper" className="form-swap rotate-sqaure" onClick={(e) => scroll_to(e,"signup-div")}><a href="#signup-div" className="unrotate-text">or create a new user</a></div>*/}
-                <div id="signup-swapper" className="form-swap rotate-sqaure" onClick={(e) => scroll_to(e,"signup-div")}><span className="unrotate-text">or create a new user</span></div>
-                {/*<div id="login-swapper" className="form-swap rotate-sqaure" onClick={(e) => scroll_to(e,"login-div")}><a href="#login-div" className="unrotate-text">Login</a></div>*/}
-                <div id="login-swapper" className="form-swap rotate-sqaure" onClick={(e) => scroll_to(e, "login-div")}><span  className="unrotate-text">Login</span></div>
+                
+                <div id="signup-swapper" className="form-swap rotate-sqaure in right-swapper" onClick={(e) => scroll_to(e,"signup-div")}><span className="unrotate-text">or create a new user</span></div>
+                
+                <div id="login-swapper" className="form-swap rotate-sqaure out right-swapper" onClick={(e) => scroll_to(e, "login-div")}><span  className="unrotate-text">Login</span></div>
 
             <div id="login-signup-div" >
-                <div id="login-div" className="slideable form-box">
+                <div id="login-div" className="form-box">
                     <h1>Login</h1>
 
                     {render_login_errors()}
@@ -136,7 +120,7 @@ export default function Login(props) {
                 
                 <div className="spacer" ></div>
 
-                <div id="signup-div" className="slideable form-box">
+                <div id="signup-div" className="form-box">
                     <h1>SIGN UP</h1>
                     <form onSubmit={(e) => signup_and_redirect(e)}>
                         <input type="text" placeholder="username" onChange={(e) => updateNewUsername(e)} value={newUsername}/>

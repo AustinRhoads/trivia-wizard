@@ -470,13 +470,19 @@ width: 80%;
 }
 
 #login-componenet{
+  position: relative;
   min-height: 100vh;
+  width: 80vw;
+  max-width: 700px;
+  margin: auto;
+  border: solid 2px var(--theme-accent);
+  display: flex;
  
 }
 
 #login-signup-div{
   position: relative;
-
+  margin: auto;
 
 
  /* display: flex;*/
@@ -493,13 +499,13 @@ width: 80%;
   scroll-behavior: smooth;
 
   height: 80vh;
-  max-height: 400px;
+  max-height: 300px;
   width: 80vw;
   max-width: 500px;
-  margin: auto;
+
 
   
-  border-radius: 25px;
+ /* border-radius: 25px;*/
   box-shadow: 0px 0px 25px #ff65bd;
   overflow-y: hidden;
   scroll-behavior: smooth;
@@ -513,59 +519,94 @@ width: 80%;
 
 }
 
-.form-box{
-  position: absolute;
-  width: 100%;
-}
+
 
 .form-swap{
   position: absolute;
-  top: 40px;
+  transition: all 2.5s ease-in-out;
+  z-index: 44;
 }
 
+
+
 .rotate-sqaure{
-  position: absolute;
+  
   width: 100px;
   height: 100px;
   border: solid 2px var(--theme-accent);
-  z-index: 2;
-  transform: rotate(45deg);
+  top: 50%;
+  transform: rotate(45deg) translate(0%, -50%);
+ 
 }
 
 .unrotate-text{
   position: absolute;
-  
   transform: rotate(-45deg) ;
   
 }
 
 #signup-swapper{
-  left: 10vw;
-  top: 40%;
-}
-
-#signup-swapper span{
-  transform: rotate(-45deg) translate(-45%, -25%)
+  
+ /* right: 10vw;*/
+  
 }
 
 #login-swapper{
-  top: 40%;
-  right:10vw;
+  /*left: 10vw;*/
 }
+
+.left-swapper{
+  top: 10%;
+  left: 10%;
+  animation: 0.6s right-to-left;
+}
+
+.right-swapper{
+  top: 70%;
+  left: 70%;
+  animation: 0.6s left-to-right;
+}
+
+
+
+#signup-swapper span{
+  transform: rotate(-45deg) translate(-45%, -25%);
+}
+
+
+
+
 
 #login-swapper span {
-  transform: rotate(-45deg) translate(-75%, 20%)
+  transform: rotate(-45deg) translate(-75%, 20%);
 }
 
-.form-swap a{
-  color: var(--white-font-color);
-  text-decoration: none;
-  transition: all .5s ease-in-out;
+@keyframes right-to-left{
+  from {
+    left: 70%;
+    top: 70%;
+  } 
+  to {
+    left: 10%;
+    top: 10%;
+  }
 }
 
-.form-swap a:hover{
-  font-size: 1.1rem;
+@keyframes left-to-right{
+  from {
+    top: 10%;
+    left: 10%;
+    
+  } 
+  to {
+    top: 70%;
+    left: 70%;
+  }
 }
+
+
+
+
 
 .form-swap:hover{
   cursor: pointer;
@@ -573,25 +614,44 @@ width: 80%;
   
 }
 
-.slideable{
-  transition: all .5s ease-in-out;
-}
+
+
+
+
 
 #login-div{
 height: 80%;
 width: 100%;
 
+
 }
 
 #login-div form{
+
  
-  transform: translate(0%, 0%);
 }
+
+
 
 #signup-div{
   height: 80%;
   width: 100%;
   transform: translate(100%, 0%);
+  
+}
+
+.form-box{
+
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0; 
+  width: 100%;
+  
+}
+
+.form-box form{
+
+
+  
 }
 
 /*
@@ -637,6 +697,7 @@ width: 100%;
 
 */
 
+
 .out {
   opacity: 0;
   display: none;
@@ -646,6 +707,7 @@ width: 100%;
   opacity: 1;
   display: block;
 }
+
 
 @keyframes fade-in {
   from {
