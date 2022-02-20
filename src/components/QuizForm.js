@@ -8,7 +8,7 @@ export default function QuizForm(props) {
     const [category, setCategory] = useState('9');
 
     const dispatch = useDispatch();
-    const [difficulty, setDifficulty] = useState("easy");
+    //const [difficulty, setDifficulty] = useState("easy");
     
 
     const easyCount = useSelector(state => state.quiz_state.easyCount)  
@@ -23,7 +23,10 @@ export default function QuizForm(props) {
 
     const submit_trivia_request = async (e) => {
         e.preventDefault();
-        dispatch(QUIZ_ACTIONS.GET_QUIZ({category, difficulty}, get_max_or_ten_questions()))
+
+        //SET DIFFICULTY***
+       // dispatch(QUIZ_ACTIONS.GET_QUIZ({category, difficulty}, get_max_or_ten_questions()))
+        dispatch(QUIZ_ACTIONS.GET_QUIZ({category}, 10))
         await props.start_game()
         let quiz = document.getElementById('quiz');
         quiz.classList.remove("quiz-off");
@@ -42,24 +45,24 @@ export default function QuizForm(props) {
         //get_category_question_counts()
        }
 
-       const set_difficulty = (e) => {
-        setDifficulty(e.target.value)
-      }
+      // const set_difficulty = (e) => {
+      //  setDifficulty(e.target.value)
+      //}
 
-      const get_max_or_ten_questions = () => {
-        switch(difficulty){
-          case "easy":
-          return easyCount >= 10 ? 10:easyCount;
-          case "medium":
-          return mediumCount  >= 10 ? 10:mediumCount;
-          case "hard":
-          return hardCount >= 10 ? 10:hardCount;
-          case "any":
-          return totalCount  >= 10 ? 10:totalCount;
-          default:
-            return 10;
-        }
-      }
+     // const get_max_or_ten_questions = () => {
+     //   switch(difficulty){
+     //     case "easy":
+     //     return easyCount >= 10 ? 10:easyCount;
+     //     case "medium":
+     //     return mediumCount  >= 10 ? 10:mediumCount;
+     //     case "hard":
+     //     return hardCount >= 10 ? 10:hardCount;
+     //     case "any":
+     //     return totalCount  >= 10 ? 10:totalCount;
+     //     default:
+     //       return 10;
+     //   }
+     // }
 
 
       
@@ -144,9 +147,13 @@ export default function QuizForm(props) {
 
 
 
-        <label htmlFor="difficulty-input">Difficulty: </label>
+      
 
-        <select id="difficulty-input" value={difficulty} onChange={e => set_difficulty(e)}>
+       {/*
+
+         <label htmlFor="difficulty-input">Difficulty: </label>
+       
+       <select id="difficulty-input" value={difficulty} onChange={e => set_difficulty(e)}>
 
           <option value="easy">Easy</option>
           <option value="medium">Medium</option>
@@ -154,6 +161,10 @@ export default function QuizForm(props) {
           <option value="any">Surpise Me</option>
 
         </select>
+
+       */
+
+       } 
 
 
         <br/>

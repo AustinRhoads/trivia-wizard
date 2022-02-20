@@ -65,25 +65,41 @@ export default function Login(props) {
         props.create_user(new_user, functions_object);
     } 
 
-   // const swap_form_type = (e) => {
-   //    let login = document.getElementById("login-div");
-   //    let signup = document.getElementById("signup-div");
-   //    let elements = [login, signup]
-//
-   //     for (const element of elements){
-   //         if(element.classList.contains("slide-up")){
-   //             element.classList.remove("slide-up");
-   //             element.classList.add("slide-down");
-   //         } else {
-   //             element.classList.remove("slide-down")
-   //             element.classList.add("slide-up");
-   //         }
-   //     }
-//
-//
-   //     
-   //     
-   // }
+    const form_swap = (e) => {
+
+        
+       // document.body.classList.toggle("disable-scroll");
+
+        //TO SELECT THE FORM DIVS***
+       // let login = document.getElementById("login-div");
+       // let signup = document.getElementById("signup-div");
+       // let elements = [login, signup];
+
+        let signup_swapper = document.getElementById("signup-swapper");
+        let login_swapper = document.getElementById("login-swapper");
+        let swappers = [signup_swapper, login_swapper]
+
+        for(const div of swappers){
+            if(div !== e.target){
+                console.log("not target: ", div)
+                console.log("target: ", e.target)
+            }
+        }
+        console.log("ya clicked me", e.target);
+
+    }
+
+    const scroll_to = (e, destination) => {
+
+        
+        let win = document.getElementById("login-signup-div");
+        let x_position_of_destination_element = document.getElementById(destination).getBoundingClientRect().left;
+        if(Math.floor(x_position_of_destination_element) !== 169){
+            win.scrollTo(x_position_of_destination_element, 0)
+        }
+
+    
+      }
 
 
     useEffect(() => {
@@ -93,8 +109,10 @@ export default function Login(props) {
     return (
         <div id="login-componenet" >
 
-                <div className="form-swap rotate-sqaure"><a href="#signup-div" className="unrotate-text">or create a new user</a></div>
-                <div className="form-swap rotate-sqaure"><a href="#login-div" className="unrotate-text out">Login</a></div>
+                {/*<div id="signup-swapper" className="form-swap rotate-sqaure" onClick={(e) => scroll_to(e,"signup-div")}><a href="#signup-div" className="unrotate-text">or create a new user</a></div>*/}
+                <div id="signup-swapper" className="form-swap rotate-sqaure" onClick={(e) => scroll_to(e,"signup-div")}><span className="unrotate-text">or create a new user</span></div>
+                {/*<div id="login-swapper" className="form-swap rotate-sqaure" onClick={(e) => scroll_to(e,"login-div")}><a href="#login-div" className="unrotate-text">Login</a></div>*/}
+                <div id="login-swapper" className="form-swap rotate-sqaure" onClick={(e) => scroll_to(e, "login-div")}><span  className="unrotate-text">Login</span></div>
 
             <div id="login-signup-div" >
                 <div id="login-div" className="slideable form-box">
@@ -119,6 +137,7 @@ export default function Login(props) {
                 <div className="spacer" ></div>
 
                 <div id="signup-div" className="slideable form-box">
+                    <h1>SIGN UP</h1>
                     <form onSubmit={(e) => signup_and_redirect(e)}>
                         <input type="text" placeholder="username" onChange={(e) => updateNewUsername(e)} value={newUsername}/>
                         <div className="spacer" ></div>

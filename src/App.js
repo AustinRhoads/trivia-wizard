@@ -99,15 +99,13 @@ const render_account_div = () => {
 
 const redirect_if_not_logged_in = () => {
   if(!logged_in){
-  
     dispatch(ROUTING_ACTIONS.SET_NEXT_ROUTE(location.pathname))
     navigate('/login', {replace: true})
-    //dispatch(ROUTING_ACTIONS.RESET_NEXT_ROUTE());
   }
 }
 
 
-///////new stuff
+
 const next_route = useSelector(state => state.routing_state.next_route);
 const need_to_reroute = useSelector(state => state.routing_state.need_to_reroute);
 

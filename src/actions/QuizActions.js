@@ -1,15 +1,20 @@
 import SEARCH_ROUTES from '../constants/SearchRoutes';
 
-const {BASE_URL, ADD_AMOUNT, ADD_CATEGORY, DIFFICULTY_PREFIX, COUNT_URL_BASE} = SEARCH_ROUTES;
+//TO GET THE QUESTIONS BASED ON DIFFICULTY LEVEL
+//const {BASE_URL, ADD_AMOUNT, ADD_CATEGORY, DIFFICULTY_PREFIX, COUNT_URL_BASE} = SEARCH_ROUTES;
+const {BASE_URL, ADD_AMOUNT, ADD_CATEGORY, COUNT_URL_BASE} = SEARCH_ROUTES;
 
 
 const format_url = (request_object, count) => {
 
 
   const PREFIX = BASE_URL + ADD_AMOUNT + `${count}` + ADD_CATEGORY + request_object.category
-  const DIFFICULTY = request_object.difficulty === "any" ? "": DIFFICULTY_PREFIX + request_object.difficulty
-
-    return PREFIX + DIFFICULTY;
+ 
+   // FORMATTING URL TO GET DIFFICULTY
+   // const DIFFICULTY = request_object.difficulty === "any" ? "": DIFFICULTY_PREFIX + request_object.difficulty
+   // return PREFIX + DIFFICULTY;
+   
+    return PREFIX ;
 }
 
 const format_count_request_url = (request_object) => {
