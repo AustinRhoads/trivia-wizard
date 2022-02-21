@@ -38,6 +38,8 @@ function App() {
   const user_state = useSelector(state => state.user_state)
   const logged_in = useSelector(state => state.user_state.logged_in)
 
+ 
+
 
   const login_user = (user, functions_object) => {
     dispatch(USER_ACTIONS.LOGIN(user, functions_object))
@@ -142,6 +144,7 @@ useEffect(() => {
   get_categories()
   get_all_counts()
   show_quiz()
+ 
 })
 
   return (

@@ -6,6 +6,9 @@ import QUIZ_ACTIONS from '../actions/QuizActions';
 export default function QuizForm(props) {
 
     const [category, setCategory] = useState('9');
+    const [rounds, setRounds] = useState(1);
+    const [questionsPerRound, setQuestionsPerRound] = useState(10);
+    const [players, setPlayers] = useState(2);
 
     const dispatch = useDispatch();
     //const [difficulty, setDifficulty] = useState("easy");
@@ -16,6 +19,7 @@ export default function QuizForm(props) {
     const hardCount = useSelector(state => state.quiz_state.hardCount)
     const totalCount = useSelector(state => state.quiz_state.totalCount)
     const all_counts = useSelector(state => state.quiz_state.all_counts)
+    const quiz_token = useSelector(state => state.quiz_state.quiz_token)
     
 
 
@@ -26,7 +30,7 @@ export default function QuizForm(props) {
 
         //SET DIFFICULTY***
        // dispatch(QUIZ_ACTIONS.GET_QUIZ({category, difficulty}, get_max_or_ten_questions()))
-        dispatch(QUIZ_ACTIONS.GET_QUIZ({category}, 10))
+        dispatch(QUIZ_ACTIONS.GET_QUIZ({category, rounds, questionsPerRound, players, quiz_token}, 10))
         await props.start_game()
         let quiz = document.getElementById('quiz');
         quiz.classList.remove("quiz-off");
@@ -64,8 +68,17 @@ export default function QuizForm(props) {
      //   }
      // }
 
-
+       const update_rounds = (e) => {
+         setRounds(e.target.value);
+       }
       
+       const update_questions_per_round = (e) => {
+         setQuestionsPerRound(e.target.value);
+       }
+
+       const update_players = (e) => {
+         setPlayers(e.target.value)
+       }
       
       
       const display_category_stats = () => {
@@ -140,8 +153,45 @@ export default function QuizForm(props) {
         <select id="category-input" onChange={e => update_category(e)} value={category}>
           {return_category_options()}
         </select>
+        
+        <br/>
+
+        <label htmlFor="rounds-input">Rounds: </label>
+        <select id="rounds-input" onChange={e => update_rounds(e)} value={rounds}>
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+      
+        </select>
+        <br/>
+
+        <label htmlFor="questions-per-round-input">Questions Per Round: </label>
+        <select id="questions-per-round-input" onChange={e => update_questions_per_round(e)} value={questionsPerRound}>
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+            <option value={6}>6</option>
+            <option value={7}>7</option>
+            <option value={8}>8</option>
+            <option value={9}>9</option>
+            <option value={10}>10</option>
+        </select>
 
         
+        <br/>
+
+        <br/>
+
+        <label htmlFor="player-input">Players: </label>
+        <select id="player-input" onChange={e => update_players(e)} value={players}>
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={3}>4</option>
+
+        </select>
         <br/>
 
 

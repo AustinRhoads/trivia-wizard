@@ -4,6 +4,7 @@ const default_state = {
     all_counts_are_fetched: false,
     quiz: [],
     SNAP: "huh what now?",
+    quiz_token: localStorage.getItem('quiz_token') || "",
 }
 
 const QuizReducer = (state = default_state, action) => {
@@ -20,6 +21,8 @@ const QuizReducer = (state = default_state, action) => {
             return {...state, easyCount: action.payload.total_easy_question_count, mediumCount: action.payload.total_medium_question_count, hardCount: action.payload.total_hard_question_count, totalCount: action.payload.total_question_count}
         case "ALL_COUNTS_ARE_FETCHED":
             return {...state, all_counts_are_fetched: true}
+        case 'SET_QUIZ_TOKEN':
+            return {...state, quiz_token: action.quiz_token}
         default:
             return state;
     }

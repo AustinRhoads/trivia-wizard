@@ -1,12 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch} from 'react-redux';
+import { useDispatch , useSelector} from 'react-redux';
 
 import ROUTING_ACTIONS from '../actions/RoutingActions';
 //import {useSelector} from 'react-redux';
 
 //import Wizard from "../images/kisspng-king-arthur-magician-dungeons-dragons-fantasy-my-merlin-5b478c21b2e550.6693665515314155857328.png"
 import Dynamic_img from "../images/kisspng-computer-icons-encapsulated-postscript-handheld-de-laptop-phone-icon-5b49db86a430a0.3590097415315669826725.png"
+import QUIZ_ACTIONS from '../actions/QuizActions';
 
 
 
@@ -16,17 +17,30 @@ export default function Home(props) {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
+
 const { logged_in } = props;
+
+const quiz_token = useSelector(state => state.quiz_state.quiz_token)
 
 const redirect_to_login = () => {
     navigate('/login', {replace: false})
 }
 
+const check_quiz_token = () => {
+    if(quiz_token === ''){
+        dispatch(QUIZ_ACTIONS.GET_NEW_TOKEN())
+    }
+}
+
+
+
 const redirect_to_game = () => {
     if(logged_in){
+        check_quiz_token();
         navigate('/game', {replace: false})
     } else {
         dispatch(ROUTING_ACTIONS.SET_NEXT_ROUTE("/game"))
+        dispatch(QUIZ_ACTIONS.GET_NEW_TOKEN())
         redirect_to_login()
     }
    

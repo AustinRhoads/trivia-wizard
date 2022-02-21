@@ -2,19 +2,19 @@ import SEARCH_ROUTES from '../constants/SearchRoutes';
 
 //TO GET THE QUESTIONS BASED ON DIFFICULTY LEVEL
 //const {BASE_URL, ADD_AMOUNT, ADD_CATEGORY, DIFFICULTY_PREFIX, COUNT_URL_BASE} = SEARCH_ROUTES;
-const {BASE_URL, ADD_AMOUNT, ADD_CATEGORY, COUNT_URL_BASE} = SEARCH_ROUTES;
+const {BASE_URL, ADD_AMOUNT, ADD_CATEGORY, COUNT_URL_BASE, RETRIEVE_TOKEN_URL, ADD_TOKEN} = SEARCH_ROUTES;
 
 
 const format_url = (request_object, count) => {
 
 
-  const PREFIX = BASE_URL + ADD_AMOUNT + `${count}` + ADD_CATEGORY + request_object.category
+  const PREFIX = BASE_URL + ADD_AMOUNT + `${count}` + ADD_CATEGORY + request_object.category 
  
    // FORMATTING URL TO GET DIFFICULTY
    // const DIFFICULTY = request_object.difficulty === "any" ? "": DIFFICULTY_PREFIX + request_object.difficulty
    // return PREFIX + DIFFICULTY;
-   
-    return PREFIX ;
+
+    return PREFIX + ADD_TOKEN + request_object.quiz_token;;
 }
 
 const format_count_request_url = (request_object) => {
@@ -49,8 +49,13 @@ const QUIZ_ACTIONS = {
             console.log("stuff is happening", url);
             fetch(url).then(resp => resp.json()).then(obj => {
 
-                   
+                if(obj.response_code === 3 || obj.response_code === 4){
+                    dispatch(QUIZ_ACTIONS.GET_NEW_TOKEN())
+                } else{
                     dispatch({type: "SET_QUIZ", payload: obj.results});
+                }
+                   
+                    
                 
          
             })
@@ -118,7 +123,16 @@ const QUIZ_ACTIONS = {
             }
            // dispatch({type: "ALL_COUNTS_ARE_FETCHED"})
         }
-    }
+    },
+
+    GET_NEW_TOKEN: () => {
+        return (dispatch) => {
+            fetch(RETRIEVE_TOKEN_URL).then(resp => resp.json()).then(obj => {
+                localStorage.setItem("quiz_token", obj.token)
+                dispatch({type: 'SET_QUIZ_TOKEN', quiz_token: obj.token})
+            })
+        }
+    },
 
 }
 
