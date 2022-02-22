@@ -40,17 +40,19 @@ const QUIZ_ACTIONS = {
         }
     },
 
-    GET_QUIZ: (request_object, count = 10) => {
+    GET_QUIZ:  (request_object, count = 10) => {
 
 
         let url = format_url(request_object, count)
       
-        return(dispatch) => {
+        return async (dispatch) => {
             console.log("stuff is happening", url);
             fetch(url).then(resp => resp.json()).then(obj => {
 
+                //TODAYS (SOON TO BE YESTERDAYS) QUIZ CODE: '621e3e52f9c3a9834b4086bd03abd18a20f9ae7ec1094bccd851080c62905b26'
                 if(obj.response_code === 3 || obj.response_code === 4){
-                    dispatch(QUIZ_ACTIONS.GET_NEW_TOKEN())
+                   dispatch(QUIZ_ACTIONS.GET_NEW_TOKEN()).then( dispatch(QUIZ_ACTIONS.GET_QUIZ(request_object, count)))
+                 
                 } else{
                     dispatch({type: "SET_QUIZ", payload: obj.results});
                 }
