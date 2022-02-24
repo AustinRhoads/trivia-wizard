@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+//import uniqueString from "unique-string"
+import cuid from 'cuid'
 
 import QUIZ_ACTIONS from '../actions/QuizActions';
+import GAME_ACTIONS from '../actions/GameActions';
 
 export default function QuizForm(props) {
 
@@ -30,6 +33,8 @@ export default function QuizForm(props) {
 
         //SET DIFFICULTY***
        // dispatch(QUIZ_ACTIONS.GET_QUIZ({category, difficulty}, get_max_or_ten_questions()))
+
+        dispatch(GAME_ACTIONS.GET_NEW_GAME({rounds, questions_per_round: questionsPerRound, players, join_code: cuid().slice(-7).toUpperCase()}))
         dispatch(QUIZ_ACTIONS.GET_QUIZ({category, rounds, questionsPerRound, players, quiz_token}, 10))
         await props.start_game()
         let quiz = document.getElementById('quiz');
@@ -119,7 +124,7 @@ export default function QuizForm(props) {
 
       useEffect(() => {
 
-        
+       
 
         const get_category_question_counts = () => {
             if(all_counts[`category_${category}_question_count`]){
