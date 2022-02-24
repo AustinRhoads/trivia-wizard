@@ -7,6 +7,7 @@ const {BASE_URL, ADD_AMOUNT, ADD_CATEGORY, COUNT_URL_BASE, RETRIEVE_TOKEN_URL, A
 
 const format_url = (request_object, count) => {
 
+    console.log(request_object)
 
   const PREFIX = BASE_URL + ADD_AMOUNT + `${count}` + ADD_CATEGORY + request_object.category 
  
@@ -40,25 +41,32 @@ const QUIZ_ACTIONS = {
         }
     },
 
-    GET_QUIZ:  (request_object, count = 10) => {
+    GET_QUIZ: (request_object, count = 10) => {
 
 
         let url = format_url(request_object, count)
       
         return async (dispatch) => {
             console.log("stuff is happening", url);
+
+           
+
             fetch(url).then(resp => resp.json()).then(obj => {
 
                 //TODAYS (SOON TO BE YESTERDAYS) QUIZ CODE: '621e3e52f9c3a9834b4086bd03abd18a20f9ae7ec1094bccd851080c62905b26'
                 if(obj.response_code === 3 || obj.response_code === 4){
-                   dispatch(QUIZ_ACTIONS.GET_NEW_TOKEN()).then( dispatch(QUIZ_ACTIONS.GET_QUIZ(request_object, count)))
+                  dispatch(QUIZ_ACTIONS.GET_NEW_TOKEN_AND_GET_QUIZ(request_object, count))
+                 
+
+                   
                  
                 } else{
                     dispatch({type: "SET_QUIZ", payload: obj.results});
                 }
                    
+
                     
-                
+               
          
             })
         }
@@ -127,13 +135,31 @@ const QUIZ_ACTIONS = {
         }
     },
 
+    GET_NEW_TOKEN_AND_GET_QUIZ: (request_object, count) => {
+        return (dispatch) => {
+            fetch(RETRIEVE_TOKEN_URL).then(resp => resp.json()).then(obj => {
+                console.log("setting it!!!!")
+                localStorage.setItem("quiz_token", obj.token)
+                dispatch({type: 'SET_QUIZ_TOKEN', quiz_token: obj.token})
+                dispatch(QUIZ_ACTIONS.GET_QUIZ({...request_object, quiz_token: obj.token}, count))
+            })
+            
+            
+        }
+       
+    },
+
     GET_NEW_TOKEN: () => {
         return (dispatch) => {
             fetch(RETRIEVE_TOKEN_URL).then(resp => resp.json()).then(obj => {
+                console.log("setting it!!!!")
                 localStorage.setItem("quiz_token", obj.token)
                 dispatch({type: 'SET_QUIZ_TOKEN', quiz_token: obj.token})
             })
+            
+            
         }
+       
     },
 
 }
