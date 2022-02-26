@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import { Route, Routes, useNavigate, useLocation} from 'react-router-dom'
 
 import { FaHeart } from "react-icons/fa";
-import QRCode from 'qrcode.react';
+//import QRCode from 'qrcode.react';
 
 import QUIZ_ACTIONS from './actions/QuizActions';
 import USER_ACTIONS from './actions/UserActions';
@@ -168,7 +168,7 @@ useEffect(() => {
         </Routes>
       
      
-    <QRCode value="https://www.austinrhoads-code.com" />
+    {/*<QRCode value="https://www.austinrhoads-code.com" />*/}
 
     <footer>
     <p>Created with < FaHeart id="fa-heart" /> by Austin Rhoads</p>

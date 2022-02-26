@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-//import uniqueString from "unique-string"
+import {useNavigate} from 'react-router-dom'
 import cuid from 'cuid'
 
 import QUIZ_ACTIONS from '../actions/QuizActions';
@@ -9,11 +9,12 @@ import GAME_ACTIONS from '../actions/GameActions';
 export default function QuizForm(props) {
 
     const [category, setCategory] = useState('9');
-    const [rounds, setRounds] = useState(1);
+    const [numberOfRounds, setNumberOfRounds] = useState(1);
     const [questionsPerRound, setQuestionsPerRound] = useState(10);
     const [players, setPlayers] = useState(2);
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     //const [difficulty, setDifficulty] = useState("easy");
     
 
@@ -23,6 +24,9 @@ export default function QuizForm(props) {
     const totalCount = useSelector(state => state.quiz_state.totalCount)
     const all_counts = useSelector(state => state.quiz_state.all_counts)
     const quiz_token = useSelector(state => state.quiz_state.quiz_token)
+
+
+  const game = useSelector(state => state.game_state.game)
     
 
 
@@ -34,13 +38,15 @@ export default function QuizForm(props) {
         //SET DIFFICULTY***
        // dispatch(QUIZ_ACTIONS.GET_QUIZ({category, difficulty}, get_max_or_ten_questions()))
 
-        dispatch(GAME_ACTIONS.GET_NEW_GAME({rounds, questions_per_round: questionsPerRound, players, join_code: cuid().slice(-7).toUpperCase()}))
-        dispatch(QUIZ_ACTIONS.GET_QUIZ({category, rounds, questionsPerRound, players, quiz_token}, 10))
-        await props.start_game()
-        let quiz = document.getElementById('quiz');
-        quiz.classList.remove("quiz-off");
-        quiz.classList.add("quiz-on");
-       
+        //GET SINGLE QUIZ AND START ANSWERING
+        //dispatch(QUIZ_ACTIONS.GET_QUIZ({category, numberOfRounds, questionsPerRound, players, quiz_token}, questionsPerRound))
+        //await props.start_game()
+        //let quiz = document.getElementById('quiz');
+        //quiz.classList.remove("quiz-off");
+        //quiz.classList.add("quiz-on");
+
+        dispatch(GAME_ACTIONS.GET_NEW_GAME({category, number_of_rounds: numberOfRounds, questions_per_round: questionsPerRound, players, join_code: cuid().slice(-7).toUpperCase(), quiz_token}))
+
       }
 
       const return_category_options = () => {
@@ -73,8 +79,8 @@ export default function QuizForm(props) {
      //   }
      // }
 
-       const update_rounds = (e) => {
-         setRounds(e.target.value);
+       const update_numberOfRounds = (e) => {
+         setNumberOfRounds(e.target.value);
        }
       
        const update_questions_per_round = (e) => {
@@ -124,7 +130,8 @@ export default function QuizForm(props) {
 
       useEffect(() => {
 
-       
+        
+       console.log(game)
 
         const get_category_question_counts = () => {
             if(all_counts[`category_${category}_question_count`]){
@@ -161,8 +168,8 @@ export default function QuizForm(props) {
         
         <br/>
 
-        <label htmlFor="rounds-input">Rounds: </label>
-        <select id="rounds-input" onChange={e => update_rounds(e)} value={rounds}>
+        <label htmlFor="numberOfRounds-input">Number Of Rounds: </label>
+        <select id="numberOfRounds-input" onChange={e => update_numberOfRounds(e)} value={numberOfRounds}>
             <option value={1}>1</option>
             <option value={2}>2</option>
             <option value={3}>3</option>

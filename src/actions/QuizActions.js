@@ -1,5 +1,10 @@
 import SEARCH_ROUTES from '../constants/SearchRoutes';
 
+
+
+
+
+
 //TO GET THE QUESTIONS BASED ON DIFFICULTY LEVEL
 //const {BASE_URL, ADD_AMOUNT, ADD_CATEGORY, DIFFICULTY_PREFIX, COUNT_URL_BASE} = SEARCH_ROUTES;
 const {BASE_URL, ADD_AMOUNT, ADD_CATEGORY, COUNT_URL_BASE, RETRIEVE_TOKEN_URL, ADD_TOKEN} = SEARCH_ROUTES;
@@ -7,7 +12,7 @@ const {BASE_URL, ADD_AMOUNT, ADD_CATEGORY, COUNT_URL_BASE, RETRIEVE_TOKEN_URL, A
 
 const format_url = (request_object, count) => {
 
-    console.log(request_object)
+    
 
   const PREFIX = BASE_URL + ADD_AMOUNT + `${count}` + ADD_CATEGORY + request_object.category 
  
@@ -62,11 +67,7 @@ const QUIZ_ACTIONS = {
                  
                 } else{
                     dispatch({type: "SET_QUIZ", payload: obj.results});
-                }
-                   
-
-                    
-               
+                }    
          
             })
         }
@@ -155,6 +156,39 @@ const QUIZ_ACTIONS = {
                 console.log("setting it!!!!")
                 localStorage.setItem("quiz_token", obj.token)
                 dispatch({type: 'SET_QUIZ_TOKEN', quiz_token: obj.token})
+            })
+            
+            
+        }
+       
+    },
+
+    GET_QUIZ_ROUND: async (game, dispatch) => {
+        
+        let url = format_url(game, game.questions_per_round)
+        var quiz
+
+        await fetch(url).then(resp => resp.json()).then(obj => {
+            console.log("HERE I AM: ", obj)
+            //qr = obj.results;
+            if(obj.response_code === 3 || obj.response_code === 4){
+                quiz = (dispatch) => (QUIZ_ACTIONS.GET_NEW_TOKEN_AND_ROUND(game));
+              } else{
+                quiz = obj.results;
+              } 
+        })
+        return quiz;
+        
+    },
+
+    GET_NEW_TOKEN_AND_ROUND: (game) => {
+        return (dispatch) => {
+            fetch(RETRIEVE_TOKEN_URL).then(resp => resp.json()).then(obj => {
+                console.log("setting it!!!!")
+                localStorage.setItem("quiz_token", obj.token)
+                dispatch({type: 'SET_QUIZ_TOKEN', quiz_token: obj.token})
+                //dispatch(QUIZ_ACTIONS.GET_QUIZ_ROUND({...request_object, quiz_token: obj.token}, count))
+                dispatch(QUIZ_ACTIONS.GET_QUIZ_ROUND({...game, quiz_token: obj.token}))
             })
             
             
