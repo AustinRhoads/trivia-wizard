@@ -12,6 +12,7 @@ export default function QuizForm(props) {
     const [numberOfRounds, setNumberOfRounds] = useState(1);
     const [questionsPerRound, setQuestionsPerRound] = useState(10);
     const [players, setPlayers] = useState(2);
+    const [gameSubmitted, setGameSubmitted] = useState(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -24,6 +25,8 @@ export default function QuizForm(props) {
     const totalCount = useSelector(state => state.quiz_state.totalCount)
     const all_counts = useSelector(state => state.quiz_state.all_counts)
     const quiz_token = useSelector(state => state.quiz_state.quiz_token)
+
+  
 
 
   const game = useSelector(state => state.game_state.game)
@@ -45,7 +48,30 @@ export default function QuizForm(props) {
         //quiz.classList.remove("quiz-off");
         //quiz.classList.add("quiz-on");
 
-        dispatch(GAME_ACTIONS.GET_NEW_GAME({category, number_of_rounds: numberOfRounds, questions_per_round: questionsPerRound, players, join_code: cuid().slice(-7).toUpperCase(), quiz_token}))
+        var rounds = []; 
+
+        for(let x = 0; x < parseInt(numberOfRounds); x++ ){
+          rounds.push({round_number: x + 1, category: category, quiz_token: quiz_token})
+        }
+
+        const request_object = {
+          category,
+          number_of_rounds: numberOfRounds,
+          questions_per_round: questionsPerRound,
+          players,
+          join_code: cuid().slice(-7).toUpperCase(),
+          quiz_token,
+          rounds: rounds,
+        }
+
+        dispatch(GAME_ACTIONS.GET_NEW_GAME(request_object))
+
+        setGameSubmitted(gameSubmitted => gameSubmitted = true);
+
+        await props.start_game()
+        //let quiz = document.getElementById('quiz');
+        //quiz.classList.remove("quiz-off");
+        //quiz.classList.add("quiz-on");
 
       }
 
@@ -126,12 +152,13 @@ export default function QuizForm(props) {
         )
       }
 
+ 
+
 
 
       useEffect(() => {
 
-        
-       console.log(game)
+  
 
         const get_category_question_counts = () => {
             if(all_counts[`category_${category}_question_count`]){
@@ -143,6 +170,7 @@ export default function QuizForm(props) {
         } 
       
         get_category_question_counts();
+
         
         
         

@@ -28,7 +28,7 @@ function App() {
   
 
 
-
+  const game = useSelector(state => state.game_state.game);
   const categories = useSelector(state => state.quiz_state.categories)
   const quiz = useSelector(state => state.quiz_state.quiz)
   const all_counts_are_fetched = useSelector(state => state.quiz_state.all_counts_are_fetched)
@@ -163,7 +163,7 @@ useEffect(() => {
           <Route path="/" element={<Home logout_user={logout_user} logged_in={logged_in}  />} />
           
           <Route path="/login" element={ <Login functions_object={functions_object} login_user={login_user} logged_in={logged_in}  loading={user_state.loading} log_in_errors={user_state.log_in_errors} create_user={create_user} /> } />
-          <Route path="/game" element={<Game categories={categories} logged_in={logged_in} redirect_if_not_logged_in={redirect_if_not_logged_in} quiz={quiz} />} />
+          <Route path="/game" element={<Game game={game} categories={categories} logged_in={logged_in} redirect_if_not_logged_in={redirect_if_not_logged_in} quiz={quiz} />} />
 
         </Routes>
       

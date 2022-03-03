@@ -1,4 +1,6 @@
 import SEARCH_ROUTES from '../constants/SearchRoutes';
+import GAME_ACTIONS from './GameActions';
+
 
 
 
@@ -8,6 +10,7 @@ import SEARCH_ROUTES from '../constants/SearchRoutes';
 //TO GET THE QUESTIONS BASED ON DIFFICULTY LEVEL
 //const {BASE_URL, ADD_AMOUNT, ADD_CATEGORY, DIFFICULTY_PREFIX, COUNT_URL_BASE} = SEARCH_ROUTES;
 const {BASE_URL, ADD_AMOUNT, ADD_CATEGORY, COUNT_URL_BASE, RETRIEVE_TOKEN_URL, ADD_TOKEN} = SEARCH_ROUTES;
+
 
 
 const format_url = (request_object, count) => {
@@ -20,7 +23,7 @@ const format_url = (request_object, count) => {
    // const DIFFICULTY = request_object.difficulty === "any" ? "": DIFFICULTY_PREFIX + request_object.difficulty
    // return PREFIX + DIFFICULTY;
 
-    return PREFIX + ADD_TOKEN + request_object.quiz_token;;
+    return PREFIX + ADD_TOKEN + request_object.quiz_token;
 }
 
 const format_count_request_url = (request_object) => {
@@ -163,6 +166,9 @@ const QUIZ_ACTIONS = {
        
     },
 
+
+    ///IT ALL STARTS HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     GET_QUIZ_ROUND: async (game, dispatch) => {
         
         let url = format_url(game, game.questions_per_round)
@@ -173,28 +179,50 @@ const QUIZ_ACTIONS = {
             //qr = obj.results;
             if(obj.response_code === 3 || obj.response_code === 4){
                 quiz = (dispatch) => (QUIZ_ACTIONS.GET_NEW_TOKEN_AND_ROUND(game));
-              } else{
+              } else{                 
                 quiz = obj.results;
+                console.log("inside quiz actions", quiz)
               } 
         })
         return quiz;
         
     },
 
-    GET_NEW_TOKEN_AND_ROUND: (game) => {
+    GET_NEW_TOKEN_AND_ROUND: (game, round_number) => {
         return (dispatch) => {
             fetch(RETRIEVE_TOKEN_URL).then(resp => resp.json()).then(obj => {
                 console.log("setting it!!!!")
                 localStorage.setItem("quiz_token", obj.token)
                 dispatch({type: 'SET_QUIZ_TOKEN', quiz_token: obj.token})
                 //dispatch(QUIZ_ACTIONS.GET_QUIZ_ROUND({...request_object, quiz_token: obj.token}, count))
-                dispatch(QUIZ_ACTIONS.GET_QUIZ_ROUND({...game, quiz_token: obj.token}))
+                dispatch(QUIZ_ACTIONS.GET_ROUND({...game, quiz_token: obj.token}, round_number))
             })
             
             
         }
        
     },
+
+    GET_ROUND: (game, {round_number, category, quiz_token}) => {
+        let url = format_url({category, quiz_token}, game.questions_per_round);
+        
+        return(dispatch) => {
+            fetch(url).then(resp => resp.json()).then(obj => {
+               
+            
+                if(obj.response_code === 3 || obj.response_code === 4){
+                   dispatch(QUIZ_ACTIONS.GET_NEW_TOKEN_AND_ROUND(game, round_number))
+                  } else{                 
+                    dispatch(GAME_ACTIONS.ADD_ROUND_TO_GAME({quiz: obj.results, round_number: round_number, game_id: game.id}))
+                    //dispatch({type: "ADD_ROUND_TO_GAME", round: {quiz: obj.results, round_number: round_number, last_round: last_round}})
+                  } 
+            })
+        }
+
+
+      
+    },
+
 
 }
 
