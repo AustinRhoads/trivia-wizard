@@ -95,11 +95,17 @@ GET_ALL_QUIZ_ROUNDS: (game, rounds) => {
     ADD_ROUND_TO_GAME: (round) =>{
       
         
-            round.quiz.map(q => {
-                let temp = q.type;
-                q.question_type = temp;
-                delete q.type;
-            })
+            //round.quiz.map(q => {
+            //    let temp = q.type;
+            //    q.question_type = temp;
+            //    delete q.type;
+            //})
+
+            round.quiz.forEach(q => {
+                    let temp = q.type;
+                    q.question_type = temp;
+                    delete q.type;
+                })
 
             console.log(round.quiz)
         const configuration_object = {

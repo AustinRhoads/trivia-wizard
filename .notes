@@ -1,5 +1,6 @@
       //Quiz Form =>
       
+       //const [difficulty, setDifficulty] = useState("easy");
       
         //SET DIFFICULTY***
        // dispatch(QUIZ_ACTIONS.GET_QUIZ({category, difficulty}, get_max_or_ten_questions()))

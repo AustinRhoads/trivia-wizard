@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {useNavigate} from 'react-router-dom'
+//import {useNavigate} from 'react-router-dom'
 import cuid from 'cuid'
 
 import QUIZ_ACTIONS from '../actions/QuizActions';
@@ -12,11 +12,11 @@ export default function QuizForm(props) {
     const [numberOfRounds, setNumberOfRounds] = useState(1);
     const [questionsPerRound, setQuestionsPerRound] = useState(10);
     const [players, setPlayers] = useState(2);
-    const [gameSubmitted, setGameSubmitted] = useState(false);
+   // const [gameSubmitted, setGameSubmitted] = useState(false);
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-    //const [difficulty, setDifficulty] = useState("easy");
+    //const navigate = useNavigate();
+   
     
 
     const easyCount = useSelector(state => state.quiz_state.easyCount)  
@@ -29,7 +29,7 @@ export default function QuizForm(props) {
   
 
 
-  const game = useSelector(state => state.game_state.game)
+ // const game = useSelector(state => state.game_state.game)
     
 
 
@@ -57,7 +57,7 @@ export default function QuizForm(props) {
 
         dispatch(GAME_ACTIONS.GET_NEW_GAME(request_object))
 
-        setGameSubmitted(gameSubmitted => gameSubmitted = true);
+       // setGameSubmitted(gameSubmitted => gameSubmitted = true);
 
         await props.start_game()
         //let quiz = document.getElementById('quiz');
