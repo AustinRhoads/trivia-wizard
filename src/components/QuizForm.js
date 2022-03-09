@@ -55,11 +55,12 @@ export default function QuizForm(props) {
           rounds: rounds,
         }
 
-        dispatch(GAME_ACTIONS.GET_NEW_GAME(request_object))
+        await dispatch(GAME_ACTIONS.GET_NEW_GAME(request_object))
+        props.redirect_to_lobby()
 
        // setGameSubmitted(gameSubmitted => gameSubmitted = true);
 
-        await props.start_game()
+        //await props.start_game()
         //let quiz = document.getElementById('quiz');
         //quiz.classList.remove("quiz-off");
         //quiz.classList.add("quiz-on");
@@ -145,10 +146,10 @@ export default function QuizForm(props) {
       
         get_category_question_counts();
 
+ 
         
         
-        
-      }, [category, all_counts, dispatch])
+      })
 
 
 

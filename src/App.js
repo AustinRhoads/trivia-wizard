@@ -109,6 +109,10 @@ const redirect_if_not_logged_in = () => {
   }
 }
 
+const redirect_to_lobby = () => {
+  navigate("/lobby", {replace: false})
+}
+
 
 
 const next_route = useSelector(state => state.routing_state.next_route);
@@ -166,9 +170,9 @@ useEffect(() => {
           <Route path="/" element={<Home logout_user={logout_user} logged_in={logged_in}  />} />
           
           <Route path="/login" element={ <Login functions_object={functions_object} login_user={login_user} logged_in={logged_in}  loading={user_state.loading} log_in_errors={user_state.log_in_errors} create_user={create_user} /> } />
-          <Route path="/game" element={<Game game={game} categories={categories} logged_in={logged_in} redirect_if_not_logged_in={redirect_if_not_logged_in} quiz={quiz} />} />
+          <Route path="/game" element={<Game game={game} categories={categories} logged_in={logged_in} redirect_if_not_logged_in={redirect_if_not_logged_in} quiz={quiz} redirect_to_lobby={redirect_to_lobby } />} />
           <Route path="/join-game" element ={<JoinPage logged_in={logged_in} redirect_if_not_logged_in={redirect_if_not_logged_in} />} />
-          <Route path="/lobby" element={<Lobby game={game} />} />
+         <Route path="/lobby" element={<Lobby game={game} />} />
         </Routes>
       
      

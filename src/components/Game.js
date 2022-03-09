@@ -1,18 +1,21 @@
 import React, {useEffect, useState} from 'react';
 //import { isMobile } from 'react-device-detect';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate, } from 'react-router-dom';
+
+
 import QuizForm from './QuizForm';
+//import Lobby from './Lobby';
 //import QuizPage from './QuizPage';
 
 export default function Game(props) {
 
-  const navigate = useNavigate()
+ // const navigate = useNavigate()
 
   const loading_game = useSelector(state => state.game_state.loading_game);
-  const rounds = useSelector(state => state.game_state.rounds)
+  //const rounds = useSelector(state => state.game_state.rounds)
 
-  const {/*quiz,*/ categories, redirect_if_not_logged_in, game} = props;
+  const {/*quiz,*/ categories, redirect_if_not_logged_in, redirect_to_lobby,/* game*/} = props;
 
   //const [score, setScore] = useState(0)
   const [gameStarted, setGameStarted] = useState(false)
@@ -23,7 +26,7 @@ export default function Game(props) {
  // }
 
   const show_form = () => {
-    return <QuizForm start_game={start_game} categories={categories}  />
+    return <QuizForm start_game={start_game} categories={categories} redirect_to_lobby={redirect_to_lobby}  />
   }
 
   //const show_quiz = () => {
@@ -34,9 +37,12 @@ export default function Game(props) {
     if(loading_game){
       return <h2>Loading...</h2> 
     } else {
-      navigate("/lobby", {replace: false})
+      
+     redirect_to_lobby()
     }
   }
+
+
 
   const start_game = () => {
     setGameStarted(true)
@@ -44,14 +50,19 @@ export default function Game(props) {
 
   useEffect(() => {
     redirect_if_not_logged_in()
-    console.log("join_code", game.join_code)
-    console.log("useEffect in game rounds: ",rounds)
-  }, [rounds, redirect_if_not_logged_in, game.join_code ])
+  
+    return function cleanUp () {
+
+    }
+
+  })
 
 
   return <div id="game">
     {/* gameStarted ?   show_quiz() : show_form() */}
     {gameStarted ?   reidrect_if_game_loaded() : show_form()}
+
+    
 
     
     
