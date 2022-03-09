@@ -135,6 +135,12 @@ GET_ALL_QUIZ_ROUNDS: (game, rounds) => {
         }
 
 
+    },
+
+    SET_GAME: (game) => {
+        return(dispatch) => {
+            dispatch({type: "SET_GAME", game: game})
+        }
     }
 };
 

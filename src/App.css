@@ -947,6 +947,11 @@ width: 100%;
 }
 
 
+#lobby{
+  height: 100vh;
+  min-height: 400px;
+}
+
 
 
 footer{

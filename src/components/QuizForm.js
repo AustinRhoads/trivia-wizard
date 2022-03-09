@@ -38,15 +38,6 @@ export default function QuizForm(props) {
     const submit_trivia_request = async (e) => {
         e.preventDefault();
 
-        //SET DIFFICULTY***
-       // dispatch(QUIZ_ACTIONS.GET_QUIZ({category, difficulty}, get_max_or_ten_questions()))
-
-        //GET SINGLE QUIZ AND START ANSWERING
-        //dispatch(QUIZ_ACTIONS.GET_QUIZ({category, numberOfRounds, questionsPerRound, players, quiz_token}, questionsPerRound))
-        //await props.start_game()
-        //let quiz = document.getElementById('quiz');
-        //quiz.classList.remove("quiz-off");
-        //quiz.classList.add("quiz-on");
 
         var rounds = []; 
 
@@ -86,24 +77,7 @@ export default function QuizForm(props) {
         //get_category_question_counts()
        }
 
-      // const set_difficulty = (e) => {
-      //  setDifficulty(e.target.value)
-      //}
 
-     // const get_max_or_ten_questions = () => {
-     //   switch(difficulty){
-     //     case "easy":
-     //     return easyCount >= 10 ? 10:easyCount;
-     //     case "medium":
-     //     return mediumCount  >= 10 ? 10:mediumCount;
-     //     case "hard":
-     //     return hardCount >= 10 ? 10:hardCount;
-     //     case "any":
-     //     return totalCount  >= 10 ? 10:totalCount;
-     //     default:
-     //       return 10;
-     //   }
-     // }
 
        const update_numberOfRounds = (e) => {
          setNumberOfRounds(e.target.value);

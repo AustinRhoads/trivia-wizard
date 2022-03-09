@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import ReactCodeInput from 'react-code-input';
+import { useNavigate } from 'react-router-dom';
 //import GAME_ACTIONS from '../actions/GameActions';
-//import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import GAME_ROUTES from '../constants/GameRoutes';
+import GAME_ACTIONS from '../actions/GameActions';
 
 
 const {JOIN_ROUTE} = GAME_ROUTES;
@@ -12,10 +14,10 @@ const {JOIN_ROUTE} = GAME_ROUTES;
 
 export default function JoinPage(props) {
 
-
+    const navigate= useNavigate();
 
     const {redirect_if_not_logged_in} = props;
-    //const dispatch = useDispatch();    
+    const dispatch = useDispatch();    
     const [errors, setErrors] = useState([])
 
     const  update_join_code = async (e) => {
@@ -29,6 +31,8 @@ export default function JoinPage(props) {
         fetch(JOIN_ROUTE + `/${code}`,).then(resp => resp.json()).then(obj => {
             if(obj.status === 200){
                 console.log(obj)
+                dispatch(GAME_ACTIONS.SET_GAME(obj))
+                navigate( "/lobby", {replace: false})
             } else {
                 setErrors(errors => errors = [...errors, obj.error])
             }
