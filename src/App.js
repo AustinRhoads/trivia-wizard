@@ -14,10 +14,12 @@ import ROUTING_ACTIONS from './actions/RoutingActions';
 import Login from './components/Login';
 import Home from './components/Home';
 import Game from './components/Game';
+import JoinPage from './components/JoinPage';
 
 import UserIcon from './images/kisspng-person-logo-computer-icons-5af2c2029ca2b1.9101275115258588186416.png'
 
 import './App.css';
+
 
 
 function App() {
@@ -164,6 +166,7 @@ useEffect(() => {
           
           <Route path="/login" element={ <Login functions_object={functions_object} login_user={login_user} logged_in={logged_in}  loading={user_state.loading} log_in_errors={user_state.log_in_errors} create_user={create_user} /> } />
           <Route path="/game" element={<Game game={game} categories={categories} logged_in={logged_in} redirect_if_not_logged_in={redirect_if_not_logged_in} quiz={quiz} />} />
+          <Route path="/join-game" element ={<JoinPage logged_in={logged_in} redirect_if_not_logged_in={redirect_if_not_logged_in} />} />
 
         </Routes>
       

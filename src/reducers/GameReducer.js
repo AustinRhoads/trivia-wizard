@@ -26,7 +26,7 @@ const GameReducer = (state=default_state, action) => {
 
            state.rounds.push(action.round)
             return {...state}
-        case "GAME_IS_LOADED":
+        case "GAME_IS_LOADED"://change to all_quizzes_loaded and change the nature of loading_game
             return {...state, loading_game: false}
         default:
             return state;

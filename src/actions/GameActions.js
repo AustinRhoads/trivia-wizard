@@ -1,7 +1,7 @@
 import GAME_ROUTES from "../constants/GameRoutes";
 import QUIZ_ACTIONS from "./QuizActions";
 
-const {NEW_GAME_ROUTE, QUIZZES_ROUTE} = GAME_ROUTES;
+const {NEW_GAME_ROUTE, QUIZZES_ROUTE, JOIN_ROUTE} = GAME_ROUTES;
 
 
 
@@ -56,24 +56,40 @@ const GAME_ACTIONS = {
             fetch(NEW_GAME_ROUTE, configuration_object).then(resp => resp.json()).then(obj => {
                 
                 dispatch({type: "SET_GAME", game: obj.game, status: obj.status})
-                GAME_ACTIONS.GET_ALL_QUIZ_ROUNDS(obj.game, game.rounds, dispatch);
+               // GAME_ACTIONS.GET_ALL_QUIZ_ROUNDS(obj.game, game.rounds, dispatch);
+               console.log("this is what rounds looks like: ", game.rounds)
+                dispatch(GAME_ACTIONS.GET_ALL_QUIZ_ROUNDS(obj.game, game.rounds));
             })
 
 
         }
     },
 
-    GET_ALL_QUIZ_ROUNDS: (game, rounds, dispatch) => {
-       
-      
+//    GET_ALL_QUIZ_ROUNDS: (game, rounds, dispatch) => {
+//       
+//      
+//
+//        for (const round of rounds) { 
+//           dispatch(QUIZ_ACTIONS.GET_ROUND(game, round) )
+//        }
+//       
+//        return true;
+//
+//    },
 
+GET_ALL_QUIZ_ROUNDS: (game, rounds) => {
+       
+      return(dispatch) => {
         for (const round of rounds) { 
-           dispatch(QUIZ_ACTIONS.GET_ROUND(game, round) )
-        }
-       
-        return true;
-
-    },
+            dispatch(QUIZ_ACTIONS.GET_ROUND(game, round) )
+         }
+        
+      }
+    
+ 
+           // return true;
+    
+        },
 
     
     ADD_ROUND_TO_GAME: (round) =>{
@@ -108,6 +124,17 @@ const GAME_ACTIONS = {
                 }
             })
         }
+    },
+
+    GET_GAME_FROM_JOIN_CODE: (code) => {
+
+        return(dispatch) => {
+            fetch(JOIN_ROUTE + `/${code}`,).then(resp => resp.json()).then(obj => {
+                return obj;
+        })
+        }
+
+
     }
 };
 

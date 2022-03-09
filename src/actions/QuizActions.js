@@ -188,14 +188,14 @@ const QUIZ_ACTIONS = {
         
     },
 
-    GET_NEW_TOKEN_AND_ROUND: (game, round_number) => {
+    GET_NEW_TOKEN_AND_ROUND: (game, quiz_request_object) => {
         return (dispatch) => {
             fetch(RETRIEVE_TOKEN_URL).then(resp => resp.json()).then(obj => {
                 console.log("setting it!!!!")
                 localStorage.setItem("quiz_token", obj.token)
                 dispatch({type: 'SET_QUIZ_TOKEN', quiz_token: obj.token})
-                //dispatch(QUIZ_ACTIONS.GET_QUIZ_ROUND({...request_object, quiz_token: obj.token}, count))
-                dispatch(QUIZ_ACTIONS.GET_ROUND({...game, quiz_token: obj.token}, round_number))
+               quiz_request_object.quiz_token = obj.token
+               dispatch(QUIZ_ACTIONS.GET_ROUND(game, quiz_request_object))
             })
             
             
@@ -204,17 +204,19 @@ const QUIZ_ACTIONS = {
     },
 
     GET_ROUND: (game, {round_number, category, quiz_token}) => {
-        let url = format_url({category, quiz_token}, game.questions_per_round);
-        
+
+        let current_token = localStorage.getItem("quiz_token") 
+        let url = format_url({category,  quiz_token: current_token}, game.questions_per_round);
+    
         return(dispatch) => {
             fetch(url).then(resp => resp.json()).then(obj => {
                
             
                 if(obj.response_code === 3 || obj.response_code === 4){
-                   dispatch(QUIZ_ACTIONS.GET_NEW_TOKEN_AND_ROUND(game, round_number))
+                   dispatch(QUIZ_ACTIONS.GET_NEW_TOKEN_AND_ROUND(game, {round_number, category, quiz_token}))
                   } else{                 
                     dispatch(GAME_ACTIONS.ADD_ROUND_TO_GAME({quiz: obj.results, round_number: round_number, game_id: game.id}))
-                    //dispatch({type: "ADD_ROUND_TO_GAME", round: {quiz: obj.results, round_number: round_number, last_round: last_round}})
+                   
                   } 
             })
         }

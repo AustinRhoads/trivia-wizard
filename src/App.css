@@ -383,6 +383,12 @@ body.disable-scroll {
   background: transparent;
 }
 
+#home-buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 #animated-div{
   
 }
@@ -391,6 +397,7 @@ body.disable-scroll {
 
 #home button:hover {
   /*box-shadow: 2px 2px 15px var(--accent-yellow);*/
+  cursor: pointer;
 }
 
 .highlight-item:hover{
@@ -923,6 +930,18 @@ width: 100%;
 
 
 
+#join-page{
+  width: 80vw;
+  height: 100vh;
+  margin: auto;
+  background-color: var(--background-color);
+}
+
+#join-game-label-1{
+  font-size: 22pt;
+}
+
+
 #fa-heart{
   color: red;
 }
@@ -932,6 +951,10 @@ width: 100%;
 
 footer{
   height: 40px;
+}
+
+.error{
+  color: red;
 }
 
 

@@ -46,18 +46,34 @@ const redirect_to_game = () => {
    
 }
 
+const redirect_to_join_game = () => {
+    if(logged_in){
+        check_quiz_token();
+        navigate('/join-game', {replace: false})
+    } else {
+        dispatch(ROUTING_ACTIONS.SET_NEXT_ROUTE("/join-game"))
+        dispatch(QUIZ_ACTIONS.GET_NEW_TOKEN())
+        redirect_to_login()
+    }
+}
+
 
 
 const new_game_button = () => {
     return <button className="btns" onClick={() => redirect_to_game()}>New Game</button>
 }
 
+const join_game_button = () => {
+    return <button className="btns-inverted" onClick={() => redirect_to_join_game()}>Join Game</button>
+}
+
 
 
 const render_new_game_button = () => {
     if(logged_in){
-        return <div>
+        return <div id="home-buttons">
             {new_game_button()}
+            {join_game_button()}
             
         </div>
 
@@ -65,7 +81,7 @@ const render_new_game_button = () => {
         return <div>
            {/* <div>{new_game_button()} as guest or  <button className="btns-inverted" onClick={() => redirect_to_login()}>Log in</button></div>*/}
            {new_game_button()}
-           
+           {join_game_button()}
         </div>
 
     }
